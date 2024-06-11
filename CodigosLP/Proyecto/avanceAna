@@ -1,0 +1,74 @@
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Material {
+public:
+    string titulo;
+    string autor;
+    string codigo;
+
+    Material(string titulo, string autor, string codigo) : titulo(titulo), autor(autor), codigo(codigo) {}
+
+    virtual void mostrarDetalles() const {
+        cout << "Título: " << titulo << ", Autor: " << autor << ", Código: " << codigo << endl;
+    }
+    
+    virtual ~Material() {}
+};
+
+class Libro : public Material {
+public:
+    Libro(string titulo, string autor, string codigo) : Material(titulo, autor, codigo) {}
+
+    void mostrarDetalles() const override {
+        cout << "Libro: ";
+        Material::mostrarDetalles();
+    }
+};
+
+class Revista : public Material {
+public:
+    Revista(string titulo, string autor, string codigo) : Material(titulo, autor, codigo) {}
+
+    void mostrarDetalles() const override {
+        cout << "Revista: ";
+        Material::mostrarDetalles();
+    }
+};
+
+class DVD : public Material {
+public:
+    DVD(string titulo, string autor, string codigo) : Material(titulo, autor, codigo) {}
+
+    void mostrarDetalles() const override {
+        cout << "DVD: ";
+        Material::mostrarDetalles();
+    }
+};
+
+int main() {
+    Material* biblioteca[100]; // Arreglo de punteros a Material
+
+    // Larreglo con diferentes tipos de materiales
+    biblioteca[0] = new Revista("La vaca lola", "Camilo CRUZ", "ISBN123");
+    biblioteca[1] = new Libro("Orgullo y prejuicio", "Jane Austen", "ISSN456");
+    biblioteca[2] = new DVD("Barbie", "Ezekiel Norton", "DVDCODE789");
+
+    // for para mostrar
+    for (int i = 0; i < 3; ++i) {
+        if (biblioteca[i] != nullptr) {
+            biblioteca[i]->mostrarDetalles();
+        }
+    }
+
+    // Liberar dinámicamente
+    for (int i = 0; i < 3; ++i) {
+        delete biblioteca[i];
+    }
+
+    return 0;
+}

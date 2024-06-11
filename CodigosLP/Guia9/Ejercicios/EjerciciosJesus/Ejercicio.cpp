@@ -318,6 +318,126 @@ int main(){
     }
     return 0;
 }
+//Ejercicio 4
+#include <iostream>
+using namespace std;
+class Personajes{
+    public:
+        virtual void atacar(string)=0;
+        virtual void defender(int)=0;
+        virtual void usarHabilidades()=0;
+
+};
+class Guerrero:public Personajes{
+    private:
+        float Habilidad1;
+        float Habilidad2;
+    public:
+        Guerrero(float h1,float h2):Habilidad1(h1),Habilidad2(h2){}
+        void atacar(string arma){
+            cout<<"Atacando con "<<arma<<endl;
+        }
+        void defender(int vida){
+            cout<<"Escudo con "<<vida<<" puntos de vida"<<endl;
+        }
+        void usarHabilidades(){
+            cout<<"Dano de habilidad1:"<<Habilidad1<<endl;
+            cout<<"Dano de habilidad2:"<<Habilidad2<<endl;
+        }
+};
+class Mago:public Personajes{
+    private:
+        float Habilidad1;
+        float Habilidad2;
+    public:
+        Mago(float h1,float h2):Habilidad1(h1),Habilidad2(h2){}
+        void atacar(string arma){
+            cout<<"Atacando con "<<arma<<endl;
+        }
+        void defender(int vida){
+            cout<<"Escudo con "<<vida<<" puntos de vida"<<endl;
+        }
+        void usarHabilidades(){
+            cout<<"Dano de habilidad1:"<<Habilidad1<<endl;
+            cout<<"Dano de habilidad2:"<<Habilidad2<<endl;
+        }
+};
+class Arquero:public Personajes{
+    private:
+        float Habilidad1;
+        float Habilidad2;
+    public:
+        Arquero(float h1,float h2):Habilidad1(h1),Habilidad2(h2){}
+        void atacar(string arma){
+            cout<<"Atacando con "<<arma<<endl;
+        }
+        void defender(int vida){
+            cout<<"Escudo con "<<vida<< "puntos de vida"<<endl;
+        }
+        void usarHabilidades(){
+            cout<<"Dano de habilidad1:"<<Habilidad1<<endl;
+            cout<<"Dano de habilidad2:"<<Habilidad2<<endl;
+        }
+};
+int main(){
+    int opc=0;
+    while (opc!=4){
+        cout<<"------------------"<<endl;
+        cout<<"Elija una opcion"<<endl;
+        cout<<"1.Guerrero\n2.Mago\n3.Arquero\n4.Salir"<<endl;
+        cout<<"------------------"<<endl;
+        cin>>opc;
+        if (opc==1){
+            float h1,h2;
+            string arma;
+            int escudo;
+            cout<<"Ingrese el arma que usara como guerrero"<<endl;
+            cin>>arma;
+            cout<<"Ingrese la vida del escudo"<<endl;
+            cin>>escudo;
+            cout<<"Ingrese el danio de la habilidad uno y dos"<<endl;
+            cin>>h1>>h2;
+            Personajes* personaje=new Guerrero(h1,h2);
+            personaje->atacar(arma);
+            personaje->defender(escudo);
+            personaje->usarHabilidades();
+            delete personaje;  //Se elimina el objeto
+        }
+        else if (opc==2){
+            float h1,h2;
+            string arma;
+            int escudo;
+            cout<<"Ingrese el arma que usara como mago"<<endl;
+            cin>>arma;
+            cout<<"Ingrese la vida del escudo"<<endl;
+            cin>>escudo;
+            cout<<"Ingrese el danio de la habilidad uno y dos"<<endl;
+            cin>>h1>>h2;
+            Personajes* personaje=new Mago(h1,h2);
+            personaje->atacar(arma);
+            personaje->defender(escudo);
+            personaje->usarHabilidades();
+            delete personaje;  //Se elimina el objeto
+        }
+        else if(opc==3){
+            float h1,h2;
+            string arma;
+            int escudo;
+            cout<<"Ingrese el arma que usara como arquero"<<endl;
+            cin>>arma;
+            cout<<"Ingrese la vida del escudo"<<endl;
+            cin>>escudo;
+            cout<<"Ingrese el danio de la habilidad uno y dos"<<endl;
+            cin>>h1>>h2;
+            Personajes* personaje=new Arquero(h1,h2);
+            personaje->atacar(arma);
+            personaje->defender(escudo);
+            personaje->usarHabilidades();
+            delete personaje;  //Se elimina el objeto
+        }
+    }
+    return 0;
+}
 
 //Ejercicio 4
 

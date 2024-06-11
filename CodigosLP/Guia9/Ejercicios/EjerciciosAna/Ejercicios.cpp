@@ -1,4 +1,157 @@
-//EJERICIC 3
+//EJERICIC 1
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// Clase base abstracta para formas geométricas
+class FormaGeometrica {
+public:
+    virtual double calcularArea() const = 0;
+    virtual double calcularPerimetro() const = 0;
+    virtual void mostrarInformacion() const = 0;
+    virtual ~FormaGeometrica() {}
+};
+
+// Circulo
+class Circulo : public FormaGeometrica {
+private:
+    double radio;
+public:
+    Circulo(double r) : radio(r) {}
+
+    double calcularArea() const override {
+        return 3.1416 * radio * radio;
+    }
+
+    double calcularPerimetro() const override {
+        return 2 * 3.1416 * radio;
+    }
+
+    void mostrarInformacion() const override {
+        cout << "Circulo -> Radio: " << radio << ", Area: " << calcularArea() << ", Perimetro: " << calcularPerimetro() << endl;
+    }
+};
+
+// Rectangulo
+class Rectangulo : public FormaGeometrica {
+private:
+    double base, altura;
+public:
+    Rectangulo(double b, double h) : base(b), altura(h) {}
+
+    double calcularArea() const override {
+        return base * altura;
+    }
+
+    double calcularPerimetro() const override {
+        return 2 * (base + altura);
+    }
+
+    void mostrarInformacion() const override {
+        cout << "Rectangulo -> Base: " << base << ", Altura: " << altura << ", Area: " << calcularArea() << ", Perimetro: " << calcularPerimetro() << endl;
+    }
+};
+
+// Triangulo
+class Triangulo : public FormaGeometrica {
+private:
+    double lado1, lado2, lado3;
+public:
+    Triangulo(double l1, double l2, double l3) : lado1(l1), lado2(l2), lado3(l3) {}
+
+    double calcularArea() const override {
+        double s = (lado1 + lado2 + lado3) / 2;
+        return sqrt(s * (s - lado1) * (s - lado2) * (s - lado3));
+    }
+
+    double calcularPerimetro() const override {
+        return lado1 + lado2 + lado3;
+    }
+
+    void mostrarInformacion() const override {
+        cout << "Triangulo -> Lados: " << lado1 << ", " << lado2 << ", " << lado3 << ", Area: " << calcularArea() << ", Perimetro: " << calcularPerimetro() << endl;
+    }
+};
+
+int main() {
+    const int max = 10;
+    FormaGeometrica* formas[max] = {nullptr}; // Arreglo de punteros a formas geométricas
+
+    int contador = 0; // Contador de formas agregadas
+
+    // Menú de opciones
+    cout << "Sistema de Gestion de Formas Geometricas" << endl;
+    cout << "1. Agregar Circulo" << endl;
+    cout << "2. Agregar Rectangulo" << endl;
+    cout << "3. Agregar Triangulo" << endl;
+    cout << "4. Mostrar Informacion de Todas las Formas" << endl;
+    cout << "5. Salir" << endl;
+
+    int opcion;
+    do {
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                if (contador < max) {
+                    double radio;
+                    cout << "Ingrese el radio del circulo: ";
+                    cin >> radio;
+                    formas[contador] = new Circulo(radio);
+                    contador++;
+                } else {
+                    cout << "No se pueden agregar mas formas. Limite alcanzado." << endl;
+                }
+                break;
+            }
+            case 2: {
+                if (contador < max) {
+                    double base, altura;
+                    cout << "Ingrese la base y la altura del rectangulo: ";
+                    cin >> base >> altura;
+                    formas[contador] = new Rectangulo(base, altura);
+                    contador++;
+                } else {
+                    cout << "No se pueden agregar mas formas. Limite alcanzado." << endl;
+                }
+                break;
+            }
+            case 3: {
+                if (contador < max) {
+                    double lado1, lado2, lado3;
+                    cout << "Ingrese los tres lados del triangulo: ";
+                    cin >> lado1 >> lado2 >> lado3;
+                    formas[contador] = new Triangulo(lado1, lado2, lado3);
+                    contador++;
+                } else {
+                    cout << "No se pueden agregar mas formas. Limite alcanzado." << endl;
+                }
+                break;
+            }
+            case 4:
+                cout << "\nInformacion de Formas Geometricas Agregadas:" << endl;
+                for (int i = 0; i < contador; i++) {
+                    formas[i]->mostrarInformacion();
+                }
+                break;
+            case 5:
+                cout << "Saliendo..." << endl;
+                break;
+            default:
+                cout << "Opcion no valida. Intente de nuevo." << endl;
+        }
+    } while (opcion != 5);
+
+    // Liberar memoria de las formas creadas
+    for (int i = 0; i < contador; i++) {
+        delete formas[i];
+    }
+
+    return 0;
+}
+//EJERCICIO 3
 #include <iostream>
 #include <vector>
 #include <string>

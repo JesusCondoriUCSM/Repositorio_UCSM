@@ -247,4 +247,77 @@ int main(){
     return 0;
 }
 //Ejercicio 3
+#include <iostream>
+using namespace std;
+class Empleados{
+    public:
+        //Metodos virtuales
+        virtual void CalcularSalario(float)=0;
+        virtual ~Empleados(){}  //Destructor virtual
+
+};
+class Asalariados:public Empleados{
+    public:
+        //Polimorfismo de subtipo
+        void CalcularSalario(float salario){
+            cout<<"Salario mensual:"<<salario<<endl;
+        }
+};
+class PorHora:public Empleados{
+    private:
+        float pagoHora;
+    public:
+    PorHora(float ph):pagoHora(ph){} //Constructor por lista de incializacion
+        void CalcularSalario(float horas){
+            cout<<"Salario total:"<<pagoHora*horas<<endl;
+        }
+};
+class Comisionista:public Empleados{
+    public:
+        void CalcularSalario(float comision){
+            CompletarTrabajo();
+            cout<<"Salario total:"<<comision<<endl;
+        }
+        void CompletarTrabajo(){
+            cout<<"Trabajo completado"<<endl;
+        }
+};
+int main(){
+    int opc=0;
+    while (opc!=4){
+        cout<<"------------------"<<endl;
+        cout<<"Elija una opcion para calcular salario"<<endl;
+        cout<<"1.Asalariado\n2.Por hora\n3.Comisionista\n4.Salir"<<endl;
+        cout<<"------------------"<<endl;
+        cin>>opc;
+        if (opc==1){
+            float salario;
+            cout<<"Ingrese el salario mensual"<<endl;
+            cin>>salario;
+            Empleados* empleado=new Asalariados();
+            empleado->CalcularSalario(salario);
+            delete empleado;  //Se elimina el objeto
+        }
+        else if (opc==2){
+            float horas,pagohora;
+            cout<<"Ingrese el pago por hora"<<endl;
+            cin>>pagohora;
+            cout<<"Ingrese las horas trabajadas"<<endl;
+            cin>>horas;
+            Empleados* empleado=new PorHora(pagohora);
+            empleado->CalcularSalario(horas);
+            delete empleado;  //Se elimina el objeto
+        }
+        else if(opc==3){
+            float comision;
+            cout<<"Ingrese la comision que recibira"<<endl;
+            Empleados* empleado=new Comisionista();
+            empleado->CalcularSalario(comision);
+            delete empleado;  //Se elimina el objeto
+        }
+    }
+    return 0;
+}
+
+//Ejercicio 4
 

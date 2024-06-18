@@ -1,0 +1,130 @@
+#include <iostream>
+
+using namespace std;
+
+// Plantilla de clase Recipiente
+template <typename T>
+class Recipiente {
+private:
+    T* arr;
+    int tamano;
+public:
+    // Constructor
+    Recipiente(int t) : tamano(t) {
+        if (tamano <= 0) {
+            cout << "El tamaño del arreglo debe ser mayor que cero. Se establecerá el tamaño a 1." << endl;
+            tamano = 1;
+        }
+        arr = new T[tamano];
+    }
+
+    // Destructor
+    ~Recipiente() {
+        delete[] arr;
+    }
+
+    // Obtener el tamaño del arreglo
+    int getTamano() const {
+        return tamano;
+    }
+
+    // Acceder a los elementos del arreglo
+    T& operator[](int indice) {
+        if (indice < 0 || indice >= tamano) {
+            cout << "Índice fuera de rango. Se devolverá el primer elemento." << endl;
+            return arr[0]; // Devuelve el primer elemento en caso de índice fuera de rango
+        }
+        return arr[indice];
+    }
+
+    // Establecer el valor de un elemento del arreglo
+    void set(int indice, T valor) {
+        if (indice < 0 || indice >= tamano) {
+            cout << "Índice fuera de rango. No se asignará el valor." << endl;
+            return;
+        }
+        arr[indice] = valor;
+    }
+
+    // Obtener el valor de un elemento del arreglo
+    T get(int indice) const {
+        if (indice < 0 || indice >= tamano) {
+            cout << "Índice fuera de rango. Se devolverá el primer elemento." << endl;
+            return arr[0]; // Devuelve el primer elemento en caso de índice fuera de rango
+        }
+        return arr[indice];
+    }
+
+    // Imprimir el contenido del arreglo
+    void imprimir() const {
+        for (int i = 0; i < tamano; ++i) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    // Ordenar el arreglo (algoritmo de selección)
+    void ordenar() {
+        for (int i = 0; i < tamano - 1; i++) {
+            int indiceMin = i;
+            for (int j = i + 1; j < tamano; j++) {
+                if (arr[j] < arr[indiceMin]) {
+                    indiceMin = j;
+                }
+            }
+            swap(arr[i], arr[indiceMin]);
+        }
+    }
+};
+
+int main() {
+    // Ejemplo con un arreglo de enteros
+    Recipiente<int> intRecipiente(5);
+    intRecipiente.set(0, 64);
+    intRecipiente.set(1, 25);
+    intRecipiente.set(2, 12);
+    intRecipiente.set(3, 22);
+    intRecipiente.set(4, 11);
+
+    cout << "Arreglo de enteros antes de ordenar: ";
+    intRecipiente.imprimir();
+
+    intRecipiente.ordenar();
+    
+    cout << "Arreglo de enteros después de ordenar: ";
+    intRecipiente.imprimir();
+
+    // Ejemplo con un arreglo de dobles
+    Recipiente<double> doubleRecipiente(5);
+    doubleRecipiente.set(0, 64.5);
+    doubleRecipiente.set(1, 25.1);
+    doubleRecipiente.set(2, 12.6);
+    doubleRecipiente.set(3, 22.4);
+    doubleRecipiente.set(4, 11.0);
+
+    cout << "Arreglo de dobles antes de ordenar: ";
+    doubleRecipiente.imprimir();
+
+    doubleRecipiente.ordenar();
+    
+    cout << "Arreglo de dobles después de ordenar: ";
+    doubleRecipiente.imprimir();
+
+    // Ejemplo con un arreglo de caracteres
+    Recipiente<char> charRecipiente(5);
+    charRecipiente.set(0, 'e');
+    charRecipiente.set(1, 'd');
+    charRecipiente.set(2, 'c');
+    charRecipiente.set(3, 'b');
+    charRecipiente.set(4, 'a');
+
+    cout << "Arreglo de caracteres antes de ordenar: ";
+    charRecipiente.imprimir();
+
+    charRecipiente.ordenar();
+    
+    cout << "Arreglo de caracteres después de ordenar: ";
+    charRecipiente.imprimir();
+
+    return 0;
+}

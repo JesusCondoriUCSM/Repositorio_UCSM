@@ -1,1 +1,88 @@
+//JERICICIO 1
+#include <iostream>
+using namespace std;
+
+// Función plantilla para hallar el mayor entre tres valores
+template <typename T>
+T findMax(T a, T b, T c) {
+    if (a >= b && a >= c)
+        return a;
+    else if (b >= a && b >= c)
+        return b;
+    else
+        return c;
+}
+
+// Función plantilla para hallar el menor entre tres valores
+template <typename T>
+T findMin(T a, T b, T c) {
+    if (a <= b && a <= c)
+        return a;
+    else if (b <= a && b <= c)
+        return b;
+    else
+        return c;
+}
+
+int main() {
+    // Ejemplos con enteros
+    int a = 5, b = 10, c = 15;
+    cout << "Entre " << a << ", " << b << " y " << c << ":\n";
+    cout << "El mayor es: " << findMax(a, b, c) << endl;
+    cout << "El menor es: " << findMin(a, b, c) << endl;
+
+    return 0;
+}
+
+//EJRCICIO 2
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Template para ordenar un arreglo usando el algoritmo de selección
+template <typename T>
+void ordenarArreglo(T arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}
+
+// Template para imprimir un arreglo
+template <typename T>
+void imprimirArreglo(T arr[], int n, const string& titulo) {
+    cout << titulo << endl;
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    // Ejemplo con un arreglo de enteros
+    int arrInt[] = {64, 25, 12, 22, 11};
+    int nInt = sizeof(arrInt)/sizeof(arrInt[0]);
+    ordenarArreglo(arrInt, nInt);
+    imprimirArreglo(arrInt, nInt, "Arreglo Ordenado de Enteros:");
+
+    // Ejemplo con un arreglo de dobles
+    double arrDouble[] = {64.5, 25.1, 12.6, 22.4, 11.0};
+    int nDouble = sizeof(arrDouble)/sizeof(arrDouble[0]);
+    ordenarArreglo(arrDouble, nDouble);
+    imprimirArreglo(arrDouble, nDouble, "Arreglo Ordenado de Dobles:");
+
+    // Ejemplo con un arreglo de caracteres
+    char arrChar[] = {'e', 'd', 'c', 'b', 'a'};
+    int nChar = sizeof(arrChar)/sizeof(arrChar[0]);
+    ordenarArreglo(arrChar, nChar);
+    imprimirArreglo(arrChar, nChar, "Arreglo Ordenado de Caracteres:");
+
+    return 0;
+}
 

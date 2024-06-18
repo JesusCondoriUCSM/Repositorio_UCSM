@@ -1,1 +1,164 @@
+//PRIMERA ACTIVIDAD//////////////////////////////////7
+//5.1
+#include <iostream>
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+// Template para calcular la distancia 
+template<typename T>
+T calcularDistancia(T x1, T y1, T x2, T y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)); //raiz
+}
+template<typename T>
+T calcularTiempoEntrega(T distancia, T velocidadPromedio) {
+    return distancia / velocidadPromedio;
+}
+template<typename T>
+void generarInfo(T* datos, int tamano, const string& titulo) {
+    cout << "Info: " << titulo << endl;
+    for (int i = 0; i < tamano; ++i) {
+        cout << datos[i] << endl;
+    }
+    cout << endl;
+}
+// Función para probar los templates
+void probarTemplates() {
+    double distancia1 = calcularDistancia(0.0, 0.0, 3.0, 4.0);
+    int distancia2 = calcularDistancia(0, 0, 6, 8);
+    cout << "Distancia 1: " << distancia1 << endl;
+    cout << "Distancia 2 : " << distancia2 << endl;
+    double tiempoEntrega1 = calcularTiempoEntrega(100.0, 50.0);  
+    float tiempoEntrega2 = calcularTiempoEntrega(200.0f, 80.0f);
+    cout << "Tiempo de Entrega 1: " << tiempoEntrega1 << " horas" << endl;
+    cout << "Tiempo de Entrega 2: " << tiempoEntrega2 << " horas" << endl;
+
+    // Generar info
+    string rutas[] = {"Ruta 1: A -> B", "Ruta 2: B -> C", "Ruta 3: C -> D"};
+    generarInfo(rutas, 3, "Rutas de Entrega");
+}
+
+int main() {
+    probarTemplates();
+    return 0;
+} 
+
+//2DA ACTIVIDAD///////////////////////////////////////////////////////
+//5.2
+#include <iostream>
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+// Template para calcular la distancia 
+template<typename T>
+T calcularDistancia(T x1, T y1, T x2, T y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+template<typename T>
+T calcularTiempoEntrega(T distancia, T velocidadPromedio) {
+    return distancia / velocidadPromedio;
+}
+
+template<typename T>
+void generarInfo(T* datos, int tamano, const string& titulo) {
+    cout << "Info: " << titulo << endl;
+    for (int i = 0; i < tamano; ++i) {
+        cout << datos[i] << endl;
+    }
+    cout << endl;
+}
+
+// Clase Ruta
+class Ruta {
+public:
+    string origen;
+    string destino;
+    double distancia; // en kilómetros
+
+    Ruta(const string& orig, const string& dest, double dist)
+        : origen(orig), destino(dest), distancia(dist) {}
+
+};
+
+// Clase Entrega
+class Entrega {
+public:
+    Ruta ruta;
+    string vehiculo;
+
+    Entrega(const Ruta& r, const string& veh) : ruta(r), vehiculo(veh) {}
+
+    template<typename T>
+    void asignarVehiculo(T veh) {
+        vehiculo = veh;
+    }
+};
+
+// Función para probar los templates
+void probarTemplates() {
+    double distancia1 = calcularDistancia(0.0, 0.0, 3.0, 4.0);
+    int distancia2 = calcularDistancia(0, 0, 6, 8);
+    cout << "Distancia 1: " << distancia1 << endl;
+    cout << "Distancia 2 : " << distancia2 << endl;
+    double tiempoEntrega1 = calcularTiempoEntrega(100.0, 50.0);  // 100 km a 50 km/h
+    float tiempoEntrega2 = calcularTiempoEntrega(200.0f, 80.0f); // 200 km a 80 km/h
+    cout << "Tiempo de Entrega 1: " << tiempoEntrega1 << " horas" << endl;
+    cout << "Tiempo de Entrega 2: " << tiempoEntrega2 << " horas" << endl;
+
+    // Generar info
+    string rutas[] = {"Ruta 1: A -> B", "Ruta 2: B -> C", "Ruta 3: C -> D"};
+    generarInfo(rutas, 3, "Rutas de Entrega");
+
+    // Crear instancias de Ruta y Entrega
+    Ruta ruta1("A", "B", 5);
+    Entrega entrega1( ruta1, "Camion");
+    cout << "Tiempo estimado de entrega para ruta1: 5 horas" <<endl;
+
+    entrega1.asignarVehiculo("Camion");
+    cout << "Vehículo asignado para entrega1: " << entrega1.vehiculo << endl;
+}
+
+int main() {
+    probarTemplates();
+    return 0;
+}
+//TERCERA PARTE//
+#include <iostream>
+using namespace std;
+
+// Función plantilla para hallar el mayor entre tres valores
+template <typename T>
+T findMax(T a, T b, T c) {
+    if (a >= b && a >= c)
+        return a;
+    else if (b >= a && b >= c)
+        return b;
+    else
+        return c;
+}
+
+// Función plantilla para hallar el menor entre tres valores
+template <typename T>
+T findMin(T a, T b, T c) {
+    if (a <= b && a <= c)
+        return a;
+    else if (b <= a && b <= c)
+        return b;
+    else
+        return c;
+}
+
+int main() {
+    // Ejemplos con enteros
+    int a = 5, b = 10, c = 15;
+    cout << "Entre " << a << ", " << b << " y " << c << ":\n";
+    cout << "El mayor es: " << findMax(a, b, c) << endl;
+    cout << "El menor es: " << findMin(a, b, c) << endl;
+
+    return 0;
+}
 

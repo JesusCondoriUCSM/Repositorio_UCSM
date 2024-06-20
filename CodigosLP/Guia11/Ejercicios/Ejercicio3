@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <cereal/types/string.hpp>
+#include <cereal/types/access.hpp>
+#include <cereal/archives/binary.hpp>
+#include <fstream>
+
+using namespace std;
+
+class Persona {
+    private:
+        string nombre;
+        int edad;
+        string direccion;
+
+    public:
+        Persona(string nombre, int edad, string direccion) : nombre(nombre), edad(edad), direccion(direccion) {}
+
+        template<class Archive>
+        void serialize(Archive& ar) {
+            ar(nombre, edad, direccion);
+        }
+
+        void setNombre(string n) { nombre = n; }
+        void setEdad(int e) { edad = e; }
+        void setDireccion(string d) { direccion = d; }
+
+        string getNombre() { return nombre; }
+        int getEdad() { return edad; }
+        string getDireccion() { return direccion; }
+};
+
+int main() {
+    Persona persona("Juan", 25, "Calle 123");
+
+    // Serialización
+    ofstream archivoSalida("persona.bin", ios::binary);
+    cereal::BinaryOutputArchive archivo;
+    archivo(persona);
+    archivoSalida.write(archivo.getBuffer(), archivo.size());
+    archivoSalida.close();
+
+    // Deserialización
+    ifstream archivoEntrada("persona.bin", ios::binary);
+    cereal::BinaryInputArchive archivoEntrada;
+    archivoEntrada.read(archivoEntrada.rdbuf());
+    Persona personaLeida;
+    archivoEntrada(personaLeida);
+
+    // Mostrar atributos
+    cout << "Nombre: " << personaLeida.getNombre() << endl;
+    cout << "Edad: " << personaLeida.getEdad() << endl;
+    cout << "Dirección: " << personaLeida.getDireccion() << endl;
+
+    return 0;
+}

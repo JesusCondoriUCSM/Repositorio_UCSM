@@ -17,7 +17,7 @@ class BaseDatos {
                 if (!archivo.is_open()) {
                     throw runtime_error("Error al abrir el archivo");
                 }
-                cout << "Lectura de archivo exitosa" << std::endl;
+                cout << "Lectura de archivo exitosa" <<endl;
             } catch (runtime_error& e) {
                 cerr << "Error: " << e.what() <<endl;
             }

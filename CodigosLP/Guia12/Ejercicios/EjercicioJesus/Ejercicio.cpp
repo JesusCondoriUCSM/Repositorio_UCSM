@@ -4,32 +4,32 @@
 using namespace std;
 class Productos{
     private:
-        string nombre;
+        string nombre;  //Atributos
         int codigo;
         string descripcion;
         int cantidad_disponible;
     public:
         Productos(string n,int c,string d,int cant):nombre(n),codigo(c),descripcion(d),cantidad_disponible(cant){}
         string getNombre(){return nombre;}
-        int getCodigo(){return codigo;}
+        int getCodigo(){return codigo;}     //Getters
         string getDescripcion(){return descripcion;}
         int getCantidad(){return cantidad_disponible;}
 
         void setNombre(string n){nombre=n;}
-        void setCodigo(int c){codigo=c;}
+        void setCodigo(int c){codigo=c;}    //Setters
         void setDescripcion(string d){descripcion=d;}
         void setCantidad(int c){cantidad_disponible=c;}
 };
-struct CompararDescripcion {
-    bool operator()(Productos* p1, Productos* p2){
+struct CompararDescripcion {    //Compara descripciones
+    bool operator()(Productos* p1, Productos* p2){  //Sobrecarga () para usar la estructura como funcion
         return p1->getDescripcion() < p2->getDescripcion();
     }
 };
 class Inventario{
     private:
-        vector <Productos*> productos;
+        vector <Productos*> productos;  //vector de referencia a objetos de la clase Productos
     public:
-        void Agregar_producto(){
+        void Agregar_producto(){    //Metodo para agregar productos
             int cantidad;
             int codigo;
             string descripcion,nombre;
@@ -37,16 +37,16 @@ class Inventario{
             cin>>nombre;
             cout<<"Codigo:"<<endl;
             cin>>codigo;
-            for(auto it=productos.begin();it!=productos.end();++it){
+            for(auto it=productos.begin();it!=productos.end();++it){    //Cerifica que sea codigo unico
                 while((*it)->getCodigo()==codigo){
                     cout<<"El codigo ya esta registrado"<<endl;
                     cout<<"Codigo:"<<endl;
                     cin>>codigo;
                 }
             }
-            cin.ignore();
+            cin.ignore();   //Limpia el buffer de entrada
             cout<<"Descripcion:"<<endl;
-            getline(cin,descripcion);
+            getline(cin,descripcion);   //Lee toda la linea ingresada
 
             while (true){
                 try
@@ -68,7 +68,7 @@ class Inventario{
                     cin.clear();
                 }
             }
-            Productos *prod=new Productos(nombre,codigo,descripcion,cantidad);
+            Productos *prod=new Productos(nombre,codigo,descripcion,cantidad);  //Crea referencia a un objeto dinamico que se agrega al vector
             productos.push_back(prod);
             
         }
@@ -78,7 +78,7 @@ class Inventario{
             bool producto_encontrado=false;
             cout<<"Ingrese el nombre del producto"<<endl;
             cin>>nombre;
-            for(auto it=productos.begin();it!=productos.end();++it){
+            for(auto it=productos.begin();it!=productos.end();++it){    //Recorre el vector con un iterador
                 if((*it)->getNombre()==nombre){
                     cout<<"Nueva cantidad:"<<endl;
                     cin>>cantidad;
@@ -86,7 +86,7 @@ class Inventario{
                     producto_encontrado=true;
                 }
             }
-            if(!producto_encontrado){
+            if(!producto_encontrado){       //Verifica si el producto se encuentra en el vector
                 cout<<"Producto no encontrado"<<endl;
             }
 
@@ -110,9 +110,9 @@ class Inventario{
             }
         }
         void MostrarProductos_Alfa(){
-            sort(productos.begin(), productos.end(), CompararDescripcion());
-            for(auto it=productos.begin();it!=productos.end();++it){
-                cout<<"Producto:"<<(*it)->getNombre()<<endl;
+            sort(productos.begin(), productos.end(), CompararDescripcion());    //Llama a la estructura, pero como se sobrecargo el operador ()                                                                   se
+            for(auto it=productos.begin();it!=productos.end();++it){            //se puede usar como funcion
+                cout<<"Producto:"<<(*it)->getNombre()<<endl;    
                 cout<<"Codigo:"<<(*it)->getCodigo()<<endl;
                 cout<<"Descripcion:"<<(*it)->getDescripcion()<<endl;
                 cout<<"Cantidad:"<<(*it)->getCantidad()<<endl;
@@ -153,6 +153,5 @@ int main(){
         }
     }
     
-
     return 0;
 }

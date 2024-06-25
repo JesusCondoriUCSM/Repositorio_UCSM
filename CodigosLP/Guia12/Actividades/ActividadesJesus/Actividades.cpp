@@ -107,3 +107,51 @@ int main(){
     }
     return 0;
 }
+//Actividad 3
+#include <iostream>
+#include <algorithm>
+#include <deque>
+using namespace std;
+
+void RecorrerDeque(const deque<char>Deque){     //Recorre el deque e imprime
+    cout<<"Deque:";
+    for(auto it=Deque.begin();it!=Deque.end();++it){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+
+void RemoverVocales(deque<char>& Deque) {   //Cambia las vocales por "*"
+    string vocales = "aeiouAEIOU";
+    for (auto it = Deque.begin(); it != Deque.end(); ++it) {    //Iterador
+        if (vocales.find(*it) != string::npos) {
+            *it = '*';
+        }
+    }
+}
+
+void Inverso(const deque<char>Deque){       //Imprime en orden inverso
+    cout<<"Deque:";
+    for(auto it=Deque.rbegin();it!=Deque.rend();++it){
+        cout<<*it<<" ";
+    }
+    cout<<endl;
+}
+
+
+
+int main(){
+    string palabra;
+    deque <char> Deque; //Contenedor deque
+    cout<<"Ingrese una palabra:";
+    cin>>palabra;
+    for(char i:palabra){    //Itera sobre cada carácter de "palabra"
+        Deque.push_back(i); //Se agrega al final del deque el carácter
+    }
+
+    RecorrerDeque(Deque);
+    RemoverVocales(Deque);
+    Inverso(Deque);
+    RecorrerDeque(Deque);
+
+}

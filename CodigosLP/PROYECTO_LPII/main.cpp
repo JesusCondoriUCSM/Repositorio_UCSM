@@ -23,8 +23,8 @@ int main() {
     Coleccion<Revistas> revistas_colecc;
     Coleccion<DVDs> dvds_colecc;
     Coleccion<CDs> cds_colecc;
-
-    while (true) {
+    int op = 0;
+    while (op != 3) {
         // Menú principal
         int op;
         cout << "*****************************************" << endl;

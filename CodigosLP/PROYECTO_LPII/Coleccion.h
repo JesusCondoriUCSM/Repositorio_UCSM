@@ -37,7 +37,9 @@ class Coleccion {
         void mostrar_coleccion() {
             if (Coleccion_bib.empty() == false) {
                 for (int i = 0; i < Coleccion_bib.size(); i++) {
+                    cout<<endl;
                     Coleccion_bib[i]->mostrarDetalles();
+                    cout<<endl;
                 }
             } else {cout << "No hay materiales en la coleccion" << endl;}
         }

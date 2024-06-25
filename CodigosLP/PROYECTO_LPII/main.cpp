@@ -23,6 +23,7 @@ int main() {
     Coleccion<Revistas> revistas_colecc;
     Coleccion<DVDs> dvds_colecc;
     Coleccion<CDs> cds_colecc;
+    
     int op = 0;
     while (op != 3) {
         // Menú principal
@@ -43,7 +44,7 @@ int main() {
                 cout << "1. Agregar Material a la Coleccion" << endl;
                 cout << "2. Buscar Material en la Coleccion" << endl;
                 cout << "3. Borrar Material en la Coleccion" << endl;
-                cout << "4. Mostrar Coleccion" << endl;
+                cout << "4. Mostrar Coleccion(Ordenada)" << endl;
                 cout << "5. Regresar al Menu Principal" << endl;
                 cout << "*****************************************" << endl;
                 cout << "Opcion: "; cin >> opc_mat;
@@ -281,18 +282,22 @@ int main() {
                         switch (opc_mat4) {
                             case 1: {
                                 // Mostrar Libros
+                                libros_colecc.ordenar_coleccion();
                                 libros_colecc.mostrar_coleccion(); break;
                             }
                             case 2: {
                                 // Mostrar Revistas
+                                revistas_colecc.ordenar_coleccion();
                                 revistas_colecc.mostrar_coleccion(); break;
                             }
                             case 3: {
                                 // Mostrar DVDs
+                                dvds_colecc.ordenar_coleccion();
                                 dvds_colecc.mostrar_coleccion(); break;
                             }
                             case 4: {
                                 // Mostrar CDs
+                                cds_colecc.ordenar_coleccion();
                                 cds_colecc.mostrar_coleccion(); break;
                             }
                         }

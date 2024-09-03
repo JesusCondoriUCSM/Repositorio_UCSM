@@ -1,6 +1,7 @@
 package lp3_e;
 import java.util.ArrayList;
 import java.util.List;
+
 abstract class Persona {
     protected String nombre;
     protected String apellido;
@@ -133,15 +134,15 @@ public class Gestion_U {
         SistemaGestion sistema = new SistemaGestion();
 
      
-        Estudiante estudiante1 = new Estudiante("Juan", "Pérez", 12345, "Ingeniería");
-        Estudiante estudiante2 = new Estudiante("Ana", "Gómez", 67890, "Matemáticas");
+        Estudiante estudiante1 = new Estudiante("Juan", "Perez", 12345, "Ingeniería");
+        Estudiante estudiante2 = new Estudiante("Carlos", "Gomez", 67890, "Matemáticas");
 
        
-        Profesor profesor1 = new Profesor("Dr. Gómez", "Martínez", "Ciencias de la Computación");
+        Profesor profesor1 = new Profesor("Gomez", "Martinez", "Ciencias de la Computación");
 
 
         Curso curso1 = new Curso("Programación en Java");
-        Curso curso2 = new Curso("Matemáticas Avanzadas");
+        Curso curso2 = new Curso("Matemática");
 
         // Agregar estudiantes, profesores y cursos al sistema
         sistema.agregarEstudiante(estudiante1);

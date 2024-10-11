@@ -1,0 +1,79 @@
+package Ejercicio1;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+public class VistaC {
+Scanner scanner=new Scanner(System.in);
+public void listarProductos(List <Producto>p) {
+if (p.isEmpty()) {
+ System.out.println("No hay productos en la lista.");
+ } else {
+ System.out.println("Lista de Productos:");
+ for (Producto prod : p) {
+ System.out.println("- " + prod.getNombre() + " | Precio: " + prod.getPrecio());
+ }
+ }
+}
+public void verCarrito(List <Producto> c) {
+if (c.isEmpty()) {
+ System.out.println("No hay productos en el carrito.");
+ } else {
+ System.out.println("Lista de productos en el carrito:");
+ for (Producto prod : c) {
+ System.out.println("- " + prod.getNombre() + " | Precio: " + prod.getPrecio());
+ }
+ }
+}
+public void historialC(List<Producto> historial) {
+if (historial.isEmpty()) {
+System.out.println("No hay historial de compras.");
+} else {
+System.out.println("Historial de Compras:");
+for (Producto compra : historial) {
+System.out.println("- Nombre: " + compra);
+}
+}
+}
+public String nombreProducto() {
+System.out.println("Ingrese el nombre del producto");
+return scanner.next();
+}
+public double solicitarPorcentajeDescuento() {
+System.out.println("Ingrese el descuento");
+return scanner.nextDouble();
+}
+public void notificarCompra() {
+System.out.println("Se realizó la compra de:");
+}
+public void ingresarProducto(Producto prod) {
+System.out.println("Ingrese el nombre");
+String nombre=scanner.next();
+System.out.println("Ingrese el precio del producto");
+double precio=scanner.nextDouble();
+prod.setNombre(nombre);
+prod.setPrecio(precio);
+}
+public void menuUsuario() {
+System.out.println("----- Menú -----");
+System.out.println("1. Listar productos");
+System.out.println("2. Insertar producto");
+System.out.println("3. Ver carrito");
+System.out.println("4. Agregar producto al carrito");
+System.out.println("5. Eliminar producto del carrito");
+System.out.println("6. Aplicar descuento");
+System.out.println("7. Calcular envío");
+System.out.println("8. Ver historial de compras");
+System.out.println("9. Realizar compra");
+System.out.println("0. Salir");
+System.out.print("Seleccione una opción: ");
+}
+
+public int solicitarOpcion() {
+ System.out.print("Selecciona una opción: ");
+ return scanner.nextInt();
+ }
+public void mostrarMensaje(String mensaje) {
+System.out.println(mensaje);
+}
+
+}

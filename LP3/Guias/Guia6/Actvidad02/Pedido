@@ -1,1 +1,32 @@
+package a;
+public class Pedido {
+    private String nombrePlato;
+    private String tipo; // Nuevo atributo para el tipo de plato
+    private boolean completado; // Estado del pedido
 
+    public Pedido(String nombrePlato, String tipo) {
+        this.nombrePlato = nombrePlato;
+        this.tipo = tipo;
+        this.completado = false; // Por defecto, el pedido no está completado
+    }
+
+    public String getNombrePlato() {
+        return nombrePlato;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public boolean isCompletado() {
+        return completado;
+    }
+
+    public void marcarComoCompleto() {
+        this.completado = true;
+    }
+
+    public void setNombrePlato(String nuevoNombre) {
+        this.nombrePlato = nuevoNombre;
+    }
+}

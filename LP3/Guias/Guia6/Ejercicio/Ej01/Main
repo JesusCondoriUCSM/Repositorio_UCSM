@@ -1,0 +1,10 @@
+package Ejercicio1;
+
+public class MainC {
+public static void main(String []args) {
+ModeloC modelo=new ModeloC();
+VistaC vista=new VistaC();
+ControladorC control=new ControladorC(modelo,vista);
+control.iniciar();
+}
+}

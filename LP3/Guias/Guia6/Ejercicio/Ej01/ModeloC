@@ -1,1 +1,33 @@
+package Ejercicio1;
+import java.util.ArrayList;
+import java.util.List;
 
+public class ModeloC {
+private List<Producto> productos;
+private List<Producto> carrito;
+private List<Producto> historial;
+public ModeloC() {
+this.productos=new ArrayList<>();
+this.carrito=new ArrayList<>();
+this.historial=new ArrayList<>();
+}
+
+public List<Producto> getProducto(){
+return this.productos;
+}
+public List<Producto> getProductoC(){
+return this.carrito;
+}
+public List<Producto> getHistorial(){
+return this.historial;
+}
+public void setCarrito() {
+carrito.clear();
+}
+public void agregarProducto(Producto prod) {
+this.productos.add(prod);
+}
+public void agregarProductoC(Producto prod) {
+this.carrito.add(prod);
+}
+}

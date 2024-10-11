@@ -1,0 +1,88 @@
+package Ejercicio1;
+
+import java.util.Iterator;
+
+public class ControladorC {
+private ModeloC modelo;
+private VistaC vista;
+
+public ControladorC(ModeloC m,VistaC v){
+this.modelo=m;
+this.vista=v;
+}
+public void eliminarProductoC(String n) {
+Iterator<Producto> iterador = modelo.getProductoC().iterator();
+while (iterador.hasNext()) {
+Producto carro = iterador.next();
+if (carro.getNombre().equals(n)) {
+iterador.remove(); // Elimina el nombre
+}
+}
+}
+public void aplicarDescuento(double porcentaje) {
+for (Producto prod : modelo.getProductoC()) {
+double precioOriginal = prod.getPrecio();
+double descuento = precioOriginal * (porcentaje / 100);
+prod.setPrecio(precioOriginal - descuento);
+}
+vista.mostrarMensaje("Descuento aplicado: " + porcentaje + "%");
+}
+
+public void calcularEnvio() {
+double costoEnvio = 5.0; 
+vista.mostrarMensaje("Costo de envío: $" + costoEnvio);
+}
+public void realizarCompra(ModeloC c) {
+vista.notificarCompra();
+vista.verCarrito(c.getProductoC());
+c.setCarrito();
+}
+public void iniciar() {
+int opcion;
+do {
+vista.menuUsuario();
+opcion = vista.solicitarOpcion();
+switch (opcion) {
+case 1:
+vista.listarProductos(modelo.getProducto());
+break;
+case 2:
+Producto producto = new Producto();
+vista.ingresarProducto(producto); 
+modelo.agregarProducto(producto); 
+break;
+case 3:
+vista.verCarrito(modelo.getProductoC());
+break;
+case 4:
+String nombre =vista.nombreProducto();
+for(Producto prod:modelo.getProducto()) {
+if(prod.getNombre().equals(nombre)) {
+modelo.getProductoC().add(prod);
+}
+}
+break;
+case 5:
+String eliminar =vista.nombreProducto();
+eliminarProductoC(eliminar);
+break;
+case 6:
+double porcentajeDescuento = vista.solicitarPorcentajeDescuento();
+aplicarDescuento(porcentajeDescuento);
+break;
+case 7:
+calcularEnvio();
+break;
+case 8:
+vista.historialC(modelo.getHistorial()); 
+break;
+case 9:
+realizarCompra(modelo);
+break;
+default:
+vista.mostrarMensaje("Opción no válida. Inténtalo de nuevo.");
+}
+} while (opcion != 0);
+
+}
+}

@@ -1,0 +1,39 @@
+package s;
+
+public class Pedido {
+    private String nombrePlato;
+    private String tipo;
+    private boolean completado; // estado del pedido
+    private boolean eliminado; // estado de eliminacion
+
+    public Pedido(String nombrePlato, String tipo) {
+        this.nombrePlato = nombrePlato;
+        this.tipo = tipo;
+        this.completado = false; // por defecto, el pedido no esta completado
+        this.eliminado = false; // por defecto, el pedido no está eliminado
+    }
+
+    public String getNombrePlato() {
+        return nombrePlato;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public boolean isCompletado() {
+        return completado;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void marcarComoCompleto() {
+        this.completado = true;
+    }
+
+    public void marcarComoEliminado() {
+        this.eliminado = true;
+    }
+}

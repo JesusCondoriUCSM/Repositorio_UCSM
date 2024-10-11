@@ -1,0 +1,122 @@
+package s;
+
+import java.util.List;
+
+public class PedidoControlador {
+    private PedidoModelo modelo;
+    private PedidoVista vista;
+
+    public PedidoControlador(PedidoModelo modelo, PedidoVista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+
+    public void agregarPedido(String nombrePlato, String tipo) {
+        if (!nombrePlato.isEmpty()) {
+            modelo.agregarPedido(new Pedido(nombrePlato, tipo));
+            vista.mostrarMensaje("Pedido agregado: " + nombrePlato);
+        } else {
+            vista.mostrarMensaje("El nombre del plato no puede estar vacio.");
+        }
+    }
+
+    public void mostrarPedidos() {
+        List<Pedido> pedidos = modelo.getPedidos();
+        vista.mostrarPedidos(pedidos);
+    }
+
+    public void completarPedido(String nombrePlato) {
+        Pedido pedido = modelo.buscarPedido(nombrePlato); // Asegúrate de tener este método en PedidoModelo
+        if (pedido != null) {
+            modelo.completarPedido(pedido);
+            vista.mostrarMensaje("pedido marcado como completo: " + nombrePlato);
+        } else {
+            vista.mostrarMensaje("no se encontró el pedido: " + nombrePlato);
+        }
+    }
+
+    public void eliminarPedido(String nombrePlato) {
+        Pedido pedido = modelo.buscarPedido(nombrePlato); // Asegúrate de tener este método en PedidoModelo
+        if (pedido != null) {
+            modelo.eliminarPedido(pedido);
+            vista.mostrarMensaje("Pedido eliminado: " + nombrePlato);
+        } else {
+            vista.mostrarMensaje("no se encontro el pedido: " + nombrePlato);
+        }
+    }
+
+    public void mostrarPedidosPendientes() {
+        List<Pedido> pendientes = modelo.obtenerPedidosPendientes();
+        vista.mostrarPedidosPendientes(pendientes);
+    }
+
+    public void mostrarPedidosCompletos() {
+        List<Pedido> completos = modelo.obtenerPedidosCompletos();
+        vista.mostrarPedidosCompletos(completos);
+    }
+
+    public void contarPedidosPendientes() {
+        int cantidad = modelo.contarPedidosPendientes();
+        vista.mostrarMensaje("Cantidad de pedidos pendientes: " + cantidad);
+    }
+
+    public void mostrarHistorial() {
+        List<Pedido> historial = modelo.getHistorial();
+        vista.mostrarHistorial(historial);
+    }
+
+    public void iniciar() {
+        String opcion;
+        do {
+            vista.mostrarMenu();
+            opcion = vista.solicitarOpcion();
+
+            switch (opcion) {
+                case "1":
+                    String nombrePlato = vista.solicitarNombrePlato();
+                    String tipoPlato = vista.solicitarTipoPlato();
+                    agregarPedido(nombrePlato, tipoPlato);
+                    break;
+
+                case "2":
+                    mostrarPedidos();
+                    break;
+
+                case "3":
+                    String nombreEliminar = vista.solicitarNombreParaEliminar();
+                    eliminarPedido(nombreEliminar);
+                    break;
+
+                case "4":
+                    String nombreCompletar = vista.solicitarNombreParaEliminar();
+                    completarPedido(nombreCompletar);
+                    break;
+
+                case "5":
+                    mostrarPedidosPendientes();
+                    break;
+
+                case "6":
+                    mostrarPedidosCompletos();
+                    break;
+
+                case "7":
+                    contarPedidosPendientes();
+                    break;
+
+                case "8":
+                    mostrarHistorial();
+                    break;
+
+                case "9":
+                    vista.mostrarMensaje("Saliendo...");
+                    break;
+
+                default:
+                    vista.mostrarMensaje("Opcion no valida. Intentalo de nuevo....");
+            }
+        } while (!opcion.equals("9"));
+
+        vista.cerrarScanner();
+    }
+}

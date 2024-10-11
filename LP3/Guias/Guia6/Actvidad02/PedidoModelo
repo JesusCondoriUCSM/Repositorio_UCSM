@@ -1,0 +1,106 @@
+package a;
+import java.util.List;
+
+public class PedidoControlador {
+    private PedidoModelo modelo;
+    private PedidoVista vista;
+
+    public PedidoControlador(PedidoModelo modelo, PedidoVista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+
+   // metodo para agregar un nuevo pedido
+   public void agregarPedido(String nombrePlato, String tipo) { 
+       if (!nombrePlato.isEmpty()) { 
+           modelo.agregarPedido(new Pedido(nombrePlato, tipo)); 
+           vista.mostrarMensaje("Pedido agregado: " + nombrePlato); 
+       } else { 
+           vista.mostrarMensaje("El nombre del plato no puede estar vacío."); 
+       } 
+   } 
+
+   // metodo para mostrar todos los pedidos
+   public void mostrarPedidos() { 
+       List<Pedido> pedidos = modelo.getPedidos(); 
+       vista.mostrarPedidos(pedidos); 
+   } 
+
+   // metodo para eliminar un pedido
+   public void eliminarPedido(String nombrePlato) { 
+       Pedido pedido = modelo.buscarPedido(nombrePlato); 
+       if (pedido != null) { 
+           modelo.eliminarPedido(pedido); 
+           vista.mostrarMensaje("Pedido eliminado: " + nombrePlato); 
+       } else { 
+           vista.mostrarMensaje("No se encontró el pedido: " + nombrePlato); 
+       } 
+   } 
+
+   // metodo para actualizar un pedido existente
+   public void actualizarPedido(Pedido pedido, String nuevoNombre) { 
+       if (pedido != null && !nuevoNombre.isEmpty()) { 
+           modelo.actualizarPedido(pedido, nuevoNombre); 
+           vista.mostrarMensaje("Pedido actualizado a: " + nuevoNombre); 
+       } else { 
+           vista.mostrarMensaje("El nuevo nombre no puede estar vacío."); 
+       } 
+   } 
+
+   // me. todo para contar los pedidos por tipo
+   public void contarPedidosPorTipo(String tipo) { 
+       int cantidad = modelo.contarPedidosPorTipo(tipo); 
+       vista.mostrarMensaje("Cantidad de pedidos del tipo '" + tipo + "': " + cantidad); 
+   } 
+
+   // mtodo para iniciar la interacción con el usuario
+   public void iniciar() { 
+       String opcion; 
+       do { 
+           vista.mostrarMenu(); 
+           opcion = vista.solicitarOpcion(); 
+
+           switch (opcion) { 
+               case "1": 
+                   String nombrePlato = vista.solicitarNombrePlato(); 
+                   String tipoPlato = vista.solicitarTipoPlato(); 
+                   agregarPedido(nombrePlato, tipoPlato); 
+                   break; 
+
+               case "2": 
+                   mostrarPedidos(); 
+                   break; 
+
+               case "3": 
+                   String nombreEliminar = vista.solicitarNombreParaEliminar(); 
+                   eliminarPedido(nombreEliminar);  
+                   break; 
+
+               case "4": // logica para actualizar un pedido
+                   String nombreActualizar = vista.solicitarNombreParaEliminar(); // reutilizando método
+                   Pedido pedidoActualizar = modelo.buscarPedido(nombreActualizar);
+                   if (pedidoActualizar != null) {
+                       String nuevoNombre = vista.solicitarNuevoNombre();
+                       actualizarPedido(pedidoActualizar, nuevoNombre);
+                   } else {
+                       vista.mostrarMensaje("No se encontró el pedido a actualizar...");
+                   }
+                   break; 
+
+               case "5": // contar por tipo
+                   String tipoContar = vista.solicitarTipoPlato();
+                   contarPedidosPorTipo(tipoContar);
+                   break; 
+
+               case "6":  
+                   vista.mostrarMensaje("Saliendo...");  
+                   break; 
+
+               default:  
+                   vista.mostrarMensaje("Opción no valida. Intentalo de nuevo :)...");  
+           }  
+       } while (!opcion.equals("6"));  
+       
+       vista.cerrarScanner();  
+   }
+}

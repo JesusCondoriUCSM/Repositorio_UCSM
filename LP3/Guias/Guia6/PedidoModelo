@@ -1,0 +1,71 @@
+package s;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PedidoModelo {
+    private List<Pedido> pedidos;
+    private List<Pedido> historial; // Historial de pedidos completados o eliminados
+
+    public PedidoModelo() {
+        pedidos = new ArrayList<>();
+        historial = new ArrayList<>();
+    }
+
+    public void agregarPedido(Pedido pedido) {
+        pedidos.add(pedido);
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public Pedido buscarPedido(String nombrePlato) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getNombrePlato().equalsIgnoreCase(nombrePlato)) {
+                return pedido;
+            }
+        }
+        return null; // Si no se encuentra el pedido
+    }
+
+    public void eliminarPedido(Pedido pedido) {
+        pedido.marcarComoEliminado(); // Marcar como eliminado en lugar de eliminarlo
+        historial.add(pedido); // Agregar al historial
+        pedidos.remove(pedido);
+    }
+
+    public void completarPedido(Pedido pedido) {
+        if (pedidos.contains(pedido)) {
+            pedido.marcarComoCompleto();
+        }
+    }
+
+    public List<Pedido> obtenerPedidosPendientes() {
+        List<Pedido> pendientes = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            if (!pedido.isCompletado() && !pedido.isEliminado()) {
+                pendientes.add(pedido);
+            }
+        }
+        return pendientes;
+    }
+
+    public List<Pedido> obtenerPedidosCompletos() {
+        List<Pedido> completos = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            if (pedido.isCompletado()) {
+                completos.add(pedido);
+            }
+        }
+        return completos;
+    }
+
+    public int contarPedidosPendientes() {
+        return obtenerPedidosPendientes().size();
+    }
+
+    public List<Pedido> getHistorial() {
+        return historial;
+    }
+}

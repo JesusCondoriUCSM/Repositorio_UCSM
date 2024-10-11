@@ -1,0 +1,97 @@
+package s;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class PedidoVista {
+    private Scanner scanner;
+
+    public PedidoVista() {
+        scanner = new Scanner(System.in);
+    }
+
+    public String solicitarNombrePlato() {
+        System.out.print("Introduce el nombre del plato: ");
+        return scanner.nextLine();
+    }
+
+    public String solicitarTipoPlato() { 
+        System.out.print("Introduce el tipo del plato: ");
+        return scanner.nextLine();
+    }
+
+    public void mostrarPedidos(List<Pedido> pedidos) {
+        if (pedidos.isEmpty()) {
+            System.out.println("No hay pedidos en la lista.");
+        } else {
+            System.out.println("Lista de Pedidos:");
+            for (Pedido pedido : pedidos) {
+                System.out.println("- " + pedido.getNombrePlato() + " (" + pedido.getTipo() + ") " +
+                                   (pedido.isCompletado() ? "[Completado]" : "[Pendiente]") +
+                                   (pedido.isEliminado() ? "[Eliminado]" : ""));
+            }
+        }
+    }
+
+    public void mostrarPedidosPendientes(List<Pedido> pendientes) {
+        if (pendientes.isEmpty()) {
+            System.out.println("No hay pedidos pendientes.");
+        } else {
+            System.out.println("Lista de Pedidos Pendientes:");
+            mostrarPedidos(pendientes);
+        }
+    }
+
+    public void mostrarPedidosCompletos(List<Pedido> completos) {
+        if (completos.isEmpty()) {
+            System.out.println("No hay pedidos completados.");
+        } else {
+            System.out.println("Lista de Pedidos Completados:");
+            mostrarPedidos(completos);
+        }
+    }
+
+    public void mostrarHistorial(List<Pedido> historial) {
+        if (historial.isEmpty()) {
+            System.out.println("No hay historial de pedidos.");
+        } else {
+            System.out.println("Historial de Pedidos:");
+            for (Pedido pedido : historial) {
+                System.out.println("- " + pedido.getNombrePlato() + " (" + pedido.getTipo() + ") " +
+                                   (pedido.isCompletado() ? "[Completado]" : "[Eliminado]"));
+            }
+        }
+    }
+
+   public void mostrarMenu() { 
+       System.out.println("\nOpciones:"); 
+       System.out.println("1. Agregar Pedido"); 
+       System.out.println("2. Mostrar Pedidos"); 
+       System.out.println("3. Eliminar Pedido"); 
+       System.out.println("4. Completar Pedido"); 
+       System.out.println("5. Mostrar Pedidos Pendientes"); 
+       System.out.println("6. Mostrar Pedidos Completos"); 
+       System.out.println("7. Contar Pedidos Pendientes"); 
+       System.out.println("8. Mostrar Historial de Pedidos"); 
+       System.out.println("9. Salir"); 
+   } 
+
+   public String solicitarOpcion() { 
+       System.out.print("Selecciona una opción: "); 
+       return scanner.nextLine(); 
+   } 
+
+   public String solicitarNombreParaEliminar() { 
+       System.out.print("Introduce el nombre del plato a eliminar/completar: "); 
+       return scanner.nextLine(); 
+   } 
+
+   // Método para mostrar mensajes
+   public void mostrarMensaje(String mensaje) { 
+       System.out.println(mensaje); 
+   } 
+
+   public void cerrarScanner() { 
+       scanner.close(); 
+   } 
+}

@@ -1,138 +1,254 @@
-package Actividades;
+//GESTOR
+package e; 
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*; 
+import java.util.*; 
 
-// Clase Personaje que representa a un personaje del videojuego con varios atributos
-class Personaje {
-    private String nombre;
-    private int vida, ataque, defensa, alcance;
 
-    // Constructor para inicializar el personaje con sus atributos
-    public Personaje(String nombre, int vida, int ataque, int defensa, int alcance) {
-        // Asignamos los valores a las variables del objeto
-        this.nombre = nombre;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.alcance = alcance;
-    }
+public class Gestor { 
+private List<Personaje> personajes; 
+private final String archivo; 
 
-    // Métodos getter para acceder a los atributos del personaje
-    public String getNombre() { return nombre; }
-    public int getVida() { return vida; }
-    public int getAtaque() { return ataque; }
-    public int getDefensa() { return defensa; }
-    public int getAlcance() { return alcance; }
 
-    // Método toString para mostrar la información del personaje de forma legible
-    @Override
-    public String toString() {
-        return "Nombre: " + nombre + ", Vida: " + vida + ", Ataque: " + ataque + 
-               ", Defensa: " + defensa + ", Alcance: " + alcance;
-    }
+public Gestor(String archivo) { 
+this.personajes = new ArrayList<>(); 
+this.archivo = archivo; 
+cargarPersonajesDesdeArchivo(); 
+
+} 
+
+
+public void agregarPersonaje(Personaje personaje) { 
+
+if (!existePersonaje(personaje.getNombre())) { 
+personajes.add(personaje); 
+guardarCambios(); 
+
+} else { 
+
+System.out.println("el personaje ya existe"); 
+
+} 
+
+} 
+
+
+public void modificarPersonaje(String nombre, String atributo, int nuevoValor) { 
+
+for (Personaje p : personajes) { 
+if (p.getNombre().equals(nombre)) { 
+switch (atributo.toLowerCase()) { 
+case "vida": 
+p.setVida(nuevoValor); 
+
+break; 
+case "ataque": 
+p.setAtaque(nuevoValor); 
+
+break; 
+
+case "defensa": 
+p.setDefensa(nuevoValor); 
+
+break; 
+case "alcance": 
+p.setAlcance(nuevoValor); 
+break; 
+
+default: 
+
+System.out.println("atributo no valido."); 
+
+} 
+
+guardarCambios(); 
+return; 
+
+} 
+
+} 
+
+System.out.println("personaje no encontrado"); 
+
+} 
+
+
+public void eliminarPersonaje(String nombre) { 
+personajes.removeIf(p -> p.getNombre().equals(nombre)); 
+guardarCambios(); //removeIf metodo de interfaz collecton elimina elementos
+//expresion par que p represente cada objeto de la lista
+//Condiciom nombre del objeto Perosnaje p.get sea igual ql valor de la variable nombre
+} 
+
+
+public void mostrarPersonajes() { 
+for (Personaje p : personajes) {//para recorrer colecciom
+System.out.println(p); 
+
+} 
+
+} 
+
+
+private boolean existePersonaje(String nombre) { 
+return personajes.stream().anyMatch(p -> p.getNombre().equals(nombre)); //saber que un lemeto cumpla con la condicion dada
+
+} 
+
+
+private void guardarCambios() { 
+try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) { 
+for (Personaje p : personajes) { 
+writer.write(p.getNombre() + "," + p.getVida() + "," + p.getAtaque() + "," + 
+p.getDefensa() + "," + p.getAlcance()); 
+
+writer.newLine(); 
+
+} 
+
+System.out.println("cambios guardados en el archivo"); 
+
+} catch (IOException e) { 
+e.printStackTrace(); 
+
+} 
+} 
+
+
+private void cargarPersonajesDesdeArchivo() { 
+
+try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) { 
+String linea; 
+while ((linea = reader.readLine()) != null) { 
+String[] datos = linea.split(","); 
+agregarPersonaje(new Personaje(datos[0], Integer.parseInt(datos[1]), 
+
+Integer.parseInt(datos[2]), Integer.parseInt(datos[3]), 
+Integer.parseInt(datos[4]))); //covnertir dato string a un valor entero
+
+} 
+
+} catch (IOException e) { 
+
+System.out.println("no se pudo cargar el archivo"); 
+
+} 
+
+} 
+
 }
 
-// Clase Gestor que maneja una lista de personajes y las operaciones sobre ellos
-class Gestor {
-    private List<Personaje> personajes = new ArrayList<>();  // Lista de personajes
-    private final String rutaArchivo = "personajes.txt";  // Ruta del archivo donde se almacenarán los personajes
 
-    // Constructor que carga los personajes existentes desde el archivo
-    public Gestor() throws IOException {
-        cargarPersonajes();  // Método para cargar personajes desde el archivo al iniciar el gestor
-    }
 
-    // Método para cargar personajes desde el archivo personajes.txt
-    private void cargarPersonajes() throws IOException {
-        File archivo = new File(rutaArchivo);  // Creamos el objeto File que representa el archivo
-        if (archivo.exists()) {  // Verificamos si el archivo existe
-            BufferedReader lector = new BufferedReader(new FileReader(archivo));  // Lector para leer el archivo
-            String linea;
-            // Leemos cada línea y creamos personajes a partir de los datos
-            while ((linea = lector.readLine()) != null) {
-                String[] datos = linea.split(",");  // Separar los atributos por comas
-                personajes.add(new Personaje(datos[0], Integer.parseInt(datos[1]), Integer.parseInt(datos[2]),
-                        Integer.parseInt(datos[3]), Integer.parseInt(datos[4])));  // Añadir personaje a la lista
-            }
-            lector.close();  // Cerramos el lector para evitar fugas de recursos
-        }
-    }
+//PERSONAJE
 
-    // Método para guardar todos los personajes en el archivo personajes.txt
-    private void guardarPersonajes() throws IOException {
-        BufferedWriter escritor = new BufferedWriter(new FileWriter(rutaArchivo));  // Escritor para escribir en el archivo
-        // Escribimos cada personaje en una nueva línea
-        for (Personaje p : personajes) {
-            escritor.write(p.getNombre() + "," + p.getVida() + "," + p.getAtaque() + "," 
-                    + p.getDefensa() + "," + p.getAlcance() + "\n");
-        }
-        escritor.close();  // Cerramos el escritor para guardar los cambios
-    }
+package e; 
 
-    // Método para añadir un nuevo personaje al gestor
-    public void añadirPersonaje(Personaje personaje) throws IOException {
-        // Verificamos si el personaje ya existe antes de añadirlo
-        for (Personaje p : personajes) {
-            if (p.getNombre().equals(personaje.getNombre())) {
-                System.out.println("Personaje ya existe y no será añadido.");
-                return;  // Si ya existe, no lo añadimos
-            }
-        }
-        personajes.add(personaje);  // Añadimos el personaje a la lista
-        guardarPersonajes();  // Guardamos los personajes en el archivo
-        System.out.println("Personaje añadido exitosamente.");
-    }
+public class Personaje { 
 
-    // Método para mostrar todos los personajes en la lista
-    public void mostrarPersonajes() {
-        // Recorremos la lista y mostramos la información de cada personaje
-        for (Personaje p : personajes) {
-            System.out.println(p);
-        }
-    }
+private String nombre; 
+private int vida; 
+private int ataque; 
+private int defensa; 
+private int alcance; 
 
-    // Método para modificar un personaje existente en base a su nombre
-    public void modificarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance) throws IOException {
-        for (Personaje p : personajes) {
-            if (p.getNombre().equals(nombre)) {
-                personajes.remove(p);  // Eliminamos el personaje actual
-                personajes.add(new Personaje(nombre, vida, ataque, defensa, alcance));  // Añadimos la nueva versión
-                guardarPersonajes();  // Guardamos los cambios en el archivo
-                System.out.println("Personaje modificado exitosamente.");
-                return;  // Terminamos la función
-            }
-        }
-        System.out.println("Personaje no encontrado para modificar.");  // Si no se encuentra, se notifica
-    }
 
-    // Método para eliminar un personaje en base a su nombre
-    public void eliminarPersonaje(String nombre) throws IOException {
-        // Removemos el personaje cuyo nombre coincida
-        personajes.removeIf(p -> p.getNombre().equals(nombre));  
-        guardarPersonajes();  // Guardamos los cambios en el archivo
-        System.out.println("Personaje eliminado exitosamente.");
-    }
+public Personaje(String nombre, int vida, int ataque, int defensa, int alcance) { 
+if (vida <= 0 || ataque <= 0 || defensa <= 0 || alcance <= 0) { 
+throw new IllegalArgumentException("todos los atributos deben ser mayores que cero"); 
+//NUMERO ENTEROS MAYOR QWUR S0
+} 
+
+this.nombre = nombre; 
+this.vida = vida; 
+this.ataque = ataque; 
+this.defensa = defensa; 
+this.alcance = alcance; 
+
+} 
+
+
+// Getters y Setters 
+public String getNombre() { 
+return nombre; 
+} 
+
+public int getVida() { 
+return vida; 
+
+} 
+
+public void setVida(int vida) { 
+if (vida > 0) this.vida = vida; 
+} 
+public int getAtaque() { 
+return ataque; 
+
+} 
+
+public void setAtaque(int ataque) { 
+if (ataque > 0) this.ataque = ataque; 
+} 
+public int getDefensa() { 
+return defensa; 
+} 
+
+public void setDefensa(int defensa) { 
+if (defensa > 0) this.defensa = defensa; 
+} 
+
+
+public int getAlcance() { 
+return alcance; 
+} 
+
+public void setAlcance(int alcance) { 
+if (alcance > 0) this.alcance = alcance; 
+} 
+
+
+@Override 
+public String toString() { 
+return String.format("Nombre: %s, Vida: %d, Ataque: %d, Defensa: %d, Alcance: %d", 
+nombre, vida, ataque, defensa, alcance);
+} //cadena formateada con los parametos recibidos 
 }
 
-// Clase principal para probar el Gestor de Personajes
-public class Main {
-    public static void main(String[] args) throws IOException {
-        Gestor gestor = new Gestor();  // Creamos el gestor que manejará los personajes
-        gestor.mostrarPersonajes();  // Mostramos los personajes al iniciar
+//MAIN
 
-        // Añadir un nuevo personaje (para probar el método)
-        Personaje nuevoPersonaje = new Personaje("Guerrero", 100, 50, 30, 10);
-        gestor.añadirPersonaje(nuevoPersonaje);
+package e; 
 
-        // Mostrar personajes después de añadir
-        gestor.mostrarPersonajes();
-        
-        // Modificar un personaje (por nombre)
-        gestor.modificarPersonaje("Guerrero", 120, 55, 35, 15);
-        
-        // Eliminar un personaje
-        gestor.eliminarPersonaje("Guerrero");
-    }
-}
+import java.util.Scanner; 
+public class Main { 
+
+public static void main(String[] args) { 
+
+Scanner scanner = new Scanner(System.in); 
+String archivo = "personajes.txt"; // NOMBRE DEL ARCHIVP
+Gestor gestor = new Gestor(archivo); 
+
+// MENU
+while (true) { 
+
+System.out.println("Seleccione una opcion:"); 
+System.out.println("1. Agregar personaje"); 
+System.out.println("2. Modificar personaje"); 
+System.out.println("3. Eliminar personaje"); 
+System.out.println("4. Mostrar personajes"); 
+System.out.println("5. Salir"); 
+int opcion = scanner.nextInt(); 
+scanner.nextLine(); //PARA LIMPIAR EL BUFFER
+switch (opcion) { 
+
+case 1: 
+System.out.print("Ingrese el nombre del personaje: "); 
+String nombre = scanner.nextLine(); 
+System.out.print("Ingrese vida: "); 
+int vida = scanner.nextInt(); 
+System.out.print("Ingrese ataque: "); 
+int ataque = scanner.nextInt(); 
+System.out.print("Ingrese defensa: "); 
+int defensa = scanner.nextInt(); 
+System.out.print("Ingrese alcance: "); 
+int alcance = scanner.nextInt(); 
+scanner.nextLine(); 

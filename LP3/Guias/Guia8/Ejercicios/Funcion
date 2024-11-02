@@ -1,0 +1,27 @@
+package conexion;
+
+import java.util.Date;
+
+public class Funcion {
+    private int idFuncion;
+    private int idPelicula;
+    private Date fechaHora;
+
+    public Funcion(int idFuncion, int idPelicula, Date fechaHora) {
+        this.idFuncion = idFuncion;
+        this.idPelicula = idPelicula;
+        this.fechaHora = fechaHora;
+    }
+
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public int getIdPelicula() {
+        return idPelicula;
+    }
+
+    public Date getFechaHora() {
+        return fechaHora;
+    }
+}

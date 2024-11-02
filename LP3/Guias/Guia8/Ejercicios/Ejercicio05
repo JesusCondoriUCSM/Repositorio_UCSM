@@ -1,0 +1,340 @@
+package conexion;
+
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Scanner;
+
+public class Menu {
+
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        Gestor gestor = new Gestor();
+
+        while (true) {
+            System.out.println("\nSeleccione una opción:");
+            System.out.println("1. Agregar Usuario");
+            System.out.println("2. Consultar Usuarios");
+            System.out.println("3. Actualizar Usuario");
+            System.out.println("4. Eliminar Usuario");
+            System.out.println("5. Agregar Película");
+            System.out.println("6. Consultar Películas");
+            System.out.println("7. Actualizar Película");
+            System.out.println("8. Eliminar Película");
+            System.out.println("9. Agregar Función");
+            System.out.println("10. Consultar Funciones");
+            System.out.println("11. Actualizar Función");
+            System.out.println("12. Eliminar Función");
+            System.out.println("13. Agregar Boleta");
+            System.out.println("14. Consultar Boletas");
+            System.out.println("15. Actualizar Boleta");
+            System.out.println("16. Eliminar Boleta");
+            System.out.println("17. Agregar Asiento");
+            System.out.println("18. Consultar Asientos");
+            System.out.println("19. Actualizar Asiento");
+            System.out.println("20. Eliminar Asiento");
+            System.out.println("21. Agregar Reserva");
+            System.out.println("22. Consultar Reservas");
+            System.out.println("23. Actualizar Reserva");
+            System.out.println("24. Eliminar Reserva");
+            System.out.println("25. Salir");
+
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    // Agregar usuario
+                    System.out.print("ID de Usuario: ");
+                    int userId = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("Nombre: ");
+                    String nombre = scanner.nextLine();
+                    System.out.print("Correo: ");
+                    String correo = scanner.nextLine();
+                    gestor.agregarUsuario(userId, nombre, correo);
+                    break;
+
+                case 2:
+                    // Consultar usuarios
+                    List<Usuario> usuarios = gestor.consultarUsuarios();
+                    for (Usuario u : usuarios) {
+                        System.out.println(u.getIdUsuario() + " - " + u.getNombre() + " - " + u.getCorreo());
+                    }
+                    break;
+
+                case 3:
+                    // Actualizar usuario
+                    System.out.print("ID de Usuario a actualizar: ");
+                    int userIdActualizar = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("Nuevo Nombre: ");
+                    String nuevoNombre = scanner.nextLine();
+                    System.out.print("Nuevo Correo: ");
+                    String nuevoCorreo = scanner.nextLine();
+
+                    // Confirmación con clave
+                    System.out.print("Ingrese clave para confirmar cambios: ");
+                    String claveConfirmacion = scanner.nextLine();
+
+                    if (claveConfirmacion.equals("clave_secreta")) { // Cambiar "clave_secreta" por la clave deseada
+                        gestor.actualizarUsuario(userIdActualizar, nuevoNombre, nuevoCorreo);
+                    } else {
+                        System.out.println("Clave incorrecta. Cambios no realizados.");
+                    }
+                    break;
+
+                case 4:
+                    // Eliminar usuario
+                    System.out.print("ID de Usuario a eliminar: ");
+                    int userIdEliminar = scanner.nextInt();
+
+                    // Confirmación con clave
+                    System.out.print("Ingrese clave para confirmar eliminación: ");
+                    claveConfirmacion = scanner.next();
+
+                    if (claveConfirmacion.equals("clave_secreta")) { // Cambiar "clave_secreta" por la clave deseada
+                        gestor.eliminarUsuario(userIdEliminar);
+                    } else {
+                        System.out.println("Clave incorrecta. Eliminación no realizada.");
+                    }
+                    break;
+
+                case 5:
+                    // Agregar película
+                    System.out.print("\nID de Película: ");
+                    int peliculaId = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("\nTítulo: ");
+                    String titulo = scanner.nextLine();
+                    System.out.print("\nGénero: ");
+                    String genero = scanner.nextLine();
+                    System.out.print("\nDuración en minutos: ");
+                    int duracion = scanner.nextInt();
+                    gestor.agregarPelicula(peliculaId, titulo, genero, duracion);
+                    break;
+
+                case 6:
+                    // Consultar películas
+                    List<Pelicula> peliculas = gestor.consultarPeliculas();
+                    for (Pelicula p : peliculas) {
+                        System.out.println(p.getIdPelicula() + " - " + p.getTitulo() + " - " + p.getGenero() + " - " + p.getDuracion());
+                    }
+                    break;
+
+                case 7:
+                    // Actualizar película
+                    System.out.print("\nID de Película a actualizar: ");
+                    int peliculaActualizar = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("\nNuevo Título: ");
+                    String nuevoTitulo = scanner.nextLine();
+                    System.out.print("\nNuevo Género: ");
+                    String nuevoGenero = scanner.nextLine();
+                    System.out.print("\nNueva Duración en minutos: ");
+                    int nuevaDuracion = scanner.nextInt();
+                    
+                   gestor.actualizarPelicula(peliculaActualizar, nuevoTitulo, nuevoGenero, nuevaDuracion);
+                   break;
+
+                case 8:
+                   // Eliminar película
+                   System.out.print("\nID de Película a eliminar: ");
+                   int peliculaEliminar = scanner.nextInt();
+                   gestor.eliminarPelicula(peliculaEliminar);
+                   break;
+
+                case 9:
+                   // Agregar función
+                   System.out.print("\nID de Función: ");
+                   int idFuncion = scanner.nextInt();
+                   System.out.print("\nID de Película: ");
+                   int idPeliculaFuncion = scanner.nextInt();
+                   Timestamp fechaHoraFuncion = Timestamp.valueOf(scanner.next()); // Formato YYYY-MM-DD HH:MM:SS
+                   
+                   gestor.agregarFuncion(idFuncion, idPeliculaFuncion, fechaHoraFuncion);
+                   break;
+
+                case 10:
+                   // Consultar funciones
+                   List<Funcion> funciones = gestor.consultarFunciones();
+                   for (Funcion f : funciones) {
+                       System.out.println(f.getIdFuncion() + " - Película ID: " + f.getIdPelicula() + " - Fecha y Hora: " + f.getFechaHora());
+                   }
+                   break;
+
+                case 11:
+                   // Actualizar función
+                   System.out.print("\nID de Función a actualizar: ");
+                   int funcionActualizarId = scanner.nextInt();
+                   scanner.nextLine(); // Limpiar buffer
+
+                   int nuevoIdPeliculaFuncion;
+                   do {
+                       try {
+                           nuevoIdPeliculaFuncion= Integer.parseInt(scanner.nextLine());
+                           break; 
+                       } catch (NumberFormatException e) {
+                           e.printStackTrace(); 
+                       }
+                       } while(true);
+
+                     Timestamp nuevaFechaHoraFuncion=Timestamp.valueOf(scanner.next()); 
+                     gestor.actualizarFuncion(funcionActualizarId,nuevoIdPeliculaFuncion,nuevaFechaHoraFuncion);
+                     break;
+
+                case 12:
+                  // Eliminar función
+                  System.out.print("\nID de Función a eliminar: ");
+                  int funcionEliminarId= scanner.nextInt();
+                  gestor.eliminarFuncion(funcionEliminarId);
+                  break;
+
+                case 13:
+                  // Agregar boleta 
+                  System.out.print("\nID de Boleta : "); 
+                  int idBoleta= scanner.nextInt(); 
+                  int idUsuarioBoleta; 
+                  do { 
+                      try { 
+                          idUsuarioBoleta= Integer.parseInt(scanner.nextLine()); 
+                          break; 
+                      } catch (NumberFormatException e) { 
+                          e.printStackTrace(); 
+                      } 
+                      } while(true); 
+
+                  int idFuncionBoleta; 
+                  do { 
+                      try { 
+                          idFuncionBoleta= Integer.parseInt(scanner.nextLine()); 
+                          break; 
+                      } catch (NumberFormatException e) { 
+                          e.printStackTrace(); 
+                      } 
+                      } while(true); 
+
+                  double precioBoleta= Double.parseDouble(scanner.next()); 
+
+                  gestor.agregarBoleta(idBoleta,idUsuarioBoleta,idFuncionBoleta,precioBoleta); 
+                  break; 
+
+                case 14:
+                  // Consultar boletas
+                  List<Boleta> boletas=gestor.consultarBoletas(); 
+                  for(Boleta b : boletas){ 
+                      System.out.println(b.getIdBoleta()+" - Usuario ID: "+b.getIdUsuario()+" - Funcion ID: "+b.getIdFuncion()+" - Precio: "+b.getPrecio()); 
+                  } 
+                  break; 
+
+                case 15:
+                  // Actualizar boleta
+                  System.out.print("\nID de Boleta a actualizar: "); 
+                  int boletaActualizar=scanner.nextInt(); 
+
+                 int nuevoIdUsuarioBoleta;  
+                 do {  
+                     try {  
+                         nuevoIdUsuarioBoleta= Integer.parseInt(scanner.nextLine());  
+                         break;  
+                     } catch (NumberFormatException e) {  
+                         e.printStackTrace();  
+                     }  
+                     } while(true);  
+
+                 int nuevoIdFuncionBoleta;  
+                 do {  
+                     try {  
+                         nuevoIdFuncionBoleta= Integer.parseInt(scanner.nextLine());  
+                         break;  
+                     } catch (NumberFormatException e) {  
+                         e.printStackTrace();  
+                     }  
+                     } while(true);  
+
+                 double nuevoPrecioBoleta= Double.parseDouble(scanner.next());  
+
+                 gestor.actualizarBoleta(boletaActualizar,nuevoIdUsuarioBoleta,nuevoIdFuncionBoleta,nuevoPrecioBoleta);  
+                 break;  
+
+                case 16:
+                 // Eliminar boleta
+                 System.out.print("\nID de Boleta a eliminar: "); 
+                 int boletaEliminar=scanner.nextInt(); 
+
+                 gestor.eliminarBoleta(boletaEliminar); 
+                 break; 
+
+                case 17:
+                 // Agregar asiento
+                 System.out.print("\nID de Asiento : "); 
+                 int idAsiento=scanner.nextInt(); 
+
+                 scanner.nextLine(); 
+
+                 String numeroAsiento=scanner.nextLine(); 
+
+                 String estado=scanner.nextLine(); 
+
+                 gestor.agregarAsiento(idAsiento,numeroAsiento,estado); 
+
+                 break; 
+
+                case 18:
+                 // Consultar asientos
+                 List<Asiento> asientos=gestor.consultarAsientos(); 
+
+                 for(Asiento a : asientos){ 
+                     System .out .println(a.getIdAsiento()+" - "+a.getNumeroAsiento()+" - "+a.getEstado()); 
+                 } 
+
+                 break; 
+
+                case 19:
+                 // Actualizar asiento
+                 Scanner input=new Scanner(System.in); 
+
+                 input.close(); 
+
+                 break; 
+
+                case 20:
+                 // Eliminar asiento
+
+                 break; 
+
+
+                case 21:
+                 // Agregar reserva
+
+                 break; 
+
+
+                case 22:
+                 // Consultar reservas
+
+                 break; 
+
+
+                case 23:
+                 // Actualizar reserva
+
+                 break; 
+
+
+                case 24:
+                 // Eliminar reserva
+
+                 break;
+
+
+                case 25:
+                  // Salir       
+                  gestor.desconectar();       
+                  return;       
+
+              default:       
+              System .out .println ("\nOpción no válida.");       
+          }       
+      }       
+   }
+}

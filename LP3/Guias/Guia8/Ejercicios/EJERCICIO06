@@ -1,0 +1,160 @@
+package conexion;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Gestor1 {
+    private List<Usuario> usuarios;
+    private List<Pelicula> peliculas;
+    private List<Boleta> boletas;
+    private List<Funcion> funciones;
+    private List<Asiento> asientos;
+    private List<Reserva> reservas;
+
+    public Gestor1() {
+        this.usuarios = new ArrayList<>();
+        this.peliculas = new ArrayList<>();
+        this.boletas = new ArrayList<>();
+        this.funciones = new ArrayList<>();
+        this.asientos = new ArrayList<>();
+        this.reservas = new ArrayList<>();
+    }
+
+    // Métodos para agregar registros
+    public void agregarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+
+    public void agregarPelicula(Pelicula pelicula) {
+        peliculas.add(pelicula);
+    }
+
+    public void agregarBoleta(Boleta boleta) {
+        boletas.add(boleta);
+    }
+
+    public void agregarFuncion(Funcion funcion) {
+        funciones.add(funcion);
+    }
+
+    public void agregarAsiento(Asiento asiento) {
+        asientos.add(asiento);
+    }
+
+    public void agregarReserva(Reserva reserva) {
+        reservas.add(reserva);
+    }
+
+    // Método para consultar usuarios
+    public List<Usuario> consultarUsuarios(String[] camposMostrar, String condicionCampo, String valorCondicion, String campoOrdenar, boolean ascendente, int limite) {
+        return realizarConsulta(usuarios, camposMostrar, condicionCampo, valorCondicion, campoOrdenar, ascendente, limite);
+    }
+
+    // Método para consultar películas
+    public List<Pelicula> consultarPeliculas(String[] camposMostrar, String condicionCampo, String valorCondicion, String campoOrdenar, boolean ascendente, int limite) {
+        return realizarConsulta(peliculas, camposMostrar, condicionCampo, valorCondicion, campoOrdenar, ascendente, limite);
+    }
+
+    // Método genérico para realizar consultas
+    @SuppressWarnings("unchecked")
+	private <T> List<T> realizarConsulta(List<T> listaRegistros,
+                                         String[] camposMostrar,
+                                         String condicionCampo,
+                                         String valorCondicion,
+                                         String campoOrdenar,
+                                         boolean ascendente,
+                                         int limite) {
+        // Filtrar registros según la condición dada
+        List<T> resultado = listaRegistros.stream()
+            .filter(r -> condicionCampo == null || cumpleCondicion(r, condicionCampo, valorCondicion))
+            .collect(Collectors.toList());
+
+        // Ordenar los resultados
+        resultado = resultado.stream().sorted(Comparator.comparing(r -> obtenerValorCampo(r, campoOrdenar), ascendente ? (Comparator<? super U>) Comparator.naturalOrder() : Comparator.reverseOrder())).collect(Collectors.toList());
+
+        // Limitar el número de registros a mostrar
+        if (limite > 0 && limite < resultado.size()) {
+            resultado = resultado.subList(0, limite);
+        }
+
+        // Mostrar solo los campos solicitados
+        return (List<T>) resultado.stream().map(r -> filtrarCampos(r, camposMostrar)).collect(Collectors.toList());
+    }
+
+    private boolean cumpleCondicion(Object registro, String campo, String valor) {
+        String valorCampo = obtenerValorCampo(registro, campo);
+        return valorCampo != null && valorCampo.equals(valor);
+    }
+
+    private String obtenerValorCampo(Object registro, String campo) {
+        if (registro instanceof Usuario) {
+            Usuario user = (Usuario) registro;
+            switch (campo) {
+                case "idUsuario": return String.valueOf(user.getIdUsuario());
+                case "nombre": return user.getNombre();
+                case "correo": return user.getCorreo();
+                default: return null;
+            }
+        } else if (registro instanceof Pelicula) {
+            Pelicula pelicula = (Pelicula) registro;
+            switch (campo) {
+                case "idPelicula": return String.valueOf(pelicula.getIdPelicula());
+                case "titulo": return pelicula.getTitulo();
+                case "genero": return pelicula.getGenero();
+                case "duracion": return String.valueOf(pelicula.getDuracion());
+                default: return null;
+            }
+        } else if (registro instanceof Boleta) {
+            Boleta boleta = (Boleta) registro;
+            switch (campo) {
+                case "idBoleta": return String.valueOf(boleta.getIdBoleta());
+                case "idUsuario": return String.valueOf(boleta.getIdUsuario());
+                case "idFuncion": return String.valueOf(boleta.getIdFuncion());
+                case "precio": return String.valueOf(boleta.getPrecio());
+                default: return null;
+            }
+        } else if (registro instanceof Funcion) {
+            Funcion funcion = (Funcion) registro;
+            switch (campo) {
+                case "idFuncion": return String.valueOf(funcion.getIdFuncion());
+                case "idPelicula": return String.valueOf(funcion.getIdPelicula());
+                case "fechaHora": return funcion.getFechaHora().toString();
+                default: return null;
+            }
+        } else if (registro instanceof Asiento) {
+            Asiento asiento = (Asiento) registro;
+            switch (campo) {
+                case "idAsiento": return String.valueOf(asiento.getIdAsiento());
+                case "numeroAsiento": return asiento.getNumeroAsiento();
+                case "estado": return asiento.getEstado();
+                default: return null;
+            }
+        } else if (registro instanceof Reserva) {
+            Reserva reserva = (Reserva) registro;
+            switch (campo) {
+                case "idReserva": return String.valueOf(reserva.getIdReserva());
+                case "idBoleta": return String.valueOf(reserva.getIdBoleta());
+                case "idAsiento": return String.valueOf(reserva.getIdAsiento());
+                default: return null;
+            }
+        }
+        return null;
+    }
+
+    private Object filtrarCampos(Object registro, String[] camposMostrar) {
+    	    Map<String, Object> camposFiltrados = new HashMap<>();
+    	    
+    	    for (String campo : camposMostrar) {
+    	        String valorCampo = obtenerValorCampo(registro, campo);
+    	        if (valorCampo != null) {
+    	            camposFiltrados.put(campo, valorCampo);
+    	        }
+    	    }
+    	    
+    	    return camposFiltrados;
+}
+}

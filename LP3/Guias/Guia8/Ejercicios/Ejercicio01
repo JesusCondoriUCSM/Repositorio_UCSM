@@ -1,1 +1,68 @@
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.Connection;
+public class Main {
+public static void main(String [] args) {
+try {
+Class.forName("org.sqlite.JDBC");
+Connection con=DriverManager.getConnection("jdbc:sqlite:torneo.db");
+if( con!=null) {
+System.out.println("Se creo y/o abrio la base de datos");
+}
+Statement stmtCrearTabla=con.createStatement();
+stmtCrearTabla.execute("CREATE TABLE jugador (id_jugador integer PRIMARY
+KEY,nick text, celular integer, correo text)");
+System.out.println("Creación de tabla exitosa");
+//Manejo de Transacciones en JDBC
+con.setAutoCommit(false);
+//DELETE
+PreparedStatement stmt1=con.prepareStatement("delete from jugador");
+stmt1.executeUpdate();
+con.commit();
+//INGRESO DATOS
+PreparedStatement stmt=con.prepareStatement("insert into jugador
+values(?,?,?,?)");
+stmt.setInt(1,1);
+stmt.setString(2, "Jugador1");
+stmt.setInt(3, 923145321);
+stmt.setString(4,"jugador1@gmail.com ");
+int i=stmt.executeUpdate();
+System.out.println(i+" datos ingresados");
+con.commit();
+//CONSULTAS
+PreparedStatement stmtConsulta= con.prepareStatement("SELECT * FROM
+jugador");
+
+ResultSet rs1=stmtConsulta.executeQuery();
+while(rs1.next()) {
+System.out.println(rs1.getInt(1)+" "+rs1.getString(2)+" "+rs1.getInt(3)+"
+"+rs1.getString(4));
+}
+//UPDATE
+PreparedStatement stmtUpdate=con.prepareStatement("UPDATE jugador SET
+id_jugador=?,nick=?,celular=?,correo=? WHERE id_jugador=?");
+stmtUpdate.setInt(1,2);
+stmtUpdate.setString(2,"jugador2");
+stmtUpdate.setInt(3,91234123);
+stmtUpdate.setString(4,"jugador2@gmail.com");
+stmtUpdate.setInt(5, 1);
+int filasActualizadas = stmtUpdate.executeUpdate(); // Ejecutar la
+actualización
+//con.rollback();
+System.out.println(filasActualizadas + " fila(s) actualizada(s)");
+//CONSULTAS
+PreparedStatement stmtConsulta1= con.prepareStatement("SELECT * FROM
+jugador");
+ResultSet rs11=stmtConsulta1.executeQuery();
+while(rs11.next()) {
+System.out.println(rs11.getInt(1)+" "+rs11.getString(2)+" "+rs11.getInt(3)+"
+"+rs11.getString(4));
+}
+con.close();
+}catch(Exception e) {
+System.out.println(e.getMessage());
+}
+}
 

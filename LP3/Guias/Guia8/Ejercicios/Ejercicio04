@@ -1,0 +1,519 @@
+package conexion;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+public class Gestor extends Conexion {
+ public Gestor() {
+ conectar(); // Establecer conexión al crear un objeto Gestor
+ crearTablas(); // Crear tablas al inicializar el gestor
+ }
+ // Método para crear las tablas
+ private void crearTablas() {
+ String createUsuario = "CREATE TABLE IF NOT EXISTS Usuario (" +
+ "ID_Usuario INTEGER PRIMARY KEY, " +
+ "Nombre TEXT NOT NULL, " +
+ "Correo TEXT NOT NULL);";
+ String createPelicula = "CREATE TABLE IF NOT EXISTS Pelicula (" +
+ "ID_Pelicula INTEGER PRIMARY KEY, " +
+ "Titulo TEXT NOT NULL, " +"Genero TEXT NOT NULL, " +
+ "Duracion INTEGER NOT NULL);";
+ String createFuncion = "CREATE TABLE IF NOT EXISTS Funcion (" +
+ "ID_Funcion INTEGER PRIMARY KEY, " +
+ "ID_Pelicula INTEGER, " +
+ "Fecha_Hora DATETIME NOT NULL, " +
+ "FOREIGN KEY (ID_Pelicula) REFERENCES
+Pelicula(ID_Pelicula));";
+ String createBoleta = "CREATE TABLE IF NOT EXISTS Boleta (" +
+ "ID_Boleta INTEGER PRIMARY KEY, " +
+ "ID_Usuario INTEGER, " +
+ "ID_Funcion INTEGER, " +
+ "Precio REAL NOT NULL, " +
+ "FOREIGN KEY (ID_Usuario) REFERENCES Usuario(ID_Usuario), "
++
+ "FOREIGN KEY (ID_Funcion) REFERENCES Funcion(ID_Funcion));";
+ String createAsiento = "CREATE TABLE IF NOT EXISTS Asiento (" +
+ "ID_Asiento INTEGER PRIMARY KEY, " +
+ "Numero_Asiento TEXT NOT NULL, " +
+ "Estado TEXT NOT NULL);";
+ String createReserva = "CREATE TABLE IF NOT EXISTS Reserva (" +
+ "ID_Reserva INTEGER PRIMARY KEY, " +
+ "ID_Boleta INTEGER, " +
+ "ID_Asiento INTEGER, " +
+ "FOREIGN KEY (ID_Boleta) REFERENCES Boleta(ID_Boleta), " +
+ "FOREIGN KEY (ID_Asiento) REFERENCES Asiento(ID_Asiento));";
+ try (Statement stmt = getConnection().createStatement()) {
+ stmt.execute(createUsuario);
+ stmt.execute(createPelicula);
+ stmt.execute(createFuncion);
+ stmt.execute(createBoleta);
+ stmt.execute(createAsiento);
+ stmt.execute(createReserva);
+ System.out.println("Tablas creadas o ya existentes.");
+ } catch (SQLException e) {
+ System.out.println("Error al crear tablas: " + e.getMessage());
+ }
+ }
+ // Métodos para Usuario
+ public void agregarUsuario(int id, String nombre, String correo) {
+ try {
+ PreparedStatement
+stmt=getConnection().prepareStatement("INSERT INTO Usuario (ID_Usuario,
+Nombre, Correo) VALUES (?, ?, ?)");
+ stmt.setInt(1,id);
+ stmt.setString(2,nombre);
+ stmt.setString(3,correo);
+ stmt.executeUpdate();
+ System.out.println("Usuario agregado correctamente.");
+ } catch(SQLException e){
+ System.out.println("Error al agregar usuario:
+"+e.getMessage());
+ }
+ } // Consultar usuarios
+ public List<Usuario> consultarUsuarios(){
+ List<Usuario> usuarios=new ArrayList<>();
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("SELECT * FROM Usuario");
+ ResultSet rs=stmt.executeQuery();
+ while(rs.next()){
+ usuarios.add(new
+Usuario(rs.getInt("ID_Usuario"),rs.getString("Nombre"),rs.getString("Correo
+")));
+ }
+ }catch(SQLException e){
+ System.out.println("Error al consultar usuarios:
+"+e.getMessage());
+ }
+ return usuarios;
+ }
+ // Actualizar usuario
+ public void actualizarUsuario(int id,String nuevoNombre,String
+nuevoCorreo){
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("UPDATE Usuario SET Nombre=?, Correo=?
+WHERE ID_Usuario=?");
+ stmt.setString(1,nuevoNombre);
+ stmt.setString(2,nuevoCorreo);
+ stmt.setInt(3,id);
+ int filasActualizadas=stmt.executeUpdate();
+ if(filasActualizadas>0){
+ System.out.println("Usuario actualizado correctamente.");
+ }else{
+ System.out.println("No se encontró el usuario con ID: "+id);
+ }
+ }catch(SQLException e){
+ System.out.println("Error al actualizar usuario:
+"+e.getMessage());
+ }
+ }
+ // Eliminar usuario
+ public void eliminarUsuario(int id){
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("DELETE FROM Usuario WHERE
+ID_Usuario=?");
+ stmt.setInt(1,id);
+
+ int filasEliminadas=stmt.executeUpdate();
+
+ if(filasEliminadas>0){
+ System.out.println("Usuario eliminado correctamente.");
+ }else{
+ System.out.println("No se encontró el usuario con ID: "+id);
+ } }catch(SQLException e){
+ System.out.println("Error al eliminar usuario: "+e.getMessage());
+ }
+ }
+
+ // Métodos para Pelicula
+ public void agregarPelicula(int idPelicula,String titulo,String
+genero,int duracion){
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("INSERT INTO Pelicula
+(ID_Pelicula,Titulo,Genero,Duracion) VALUES (?, ?, ?, ?)");
+ stmt.setInt(1,idPelicula);
+ stmt.setString(2,titulo);
+ stmt.setString(3,genero);
+ stmt.setInt(4,duracion);
+ stmt.executeUpdate();
+ System.out.println("Película agregada correctamente.");
+ }catch(SQLException e){
+ System.out.println("Error al agregar película: "+e.getMessage());
+ }
+ }
+ // Consultar películas
+ public List<Pelicula> consultarPeliculas(){
+ List<Pelicula> peliculas=new ArrayList<>();
+
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("SELECT * FROM Pelicula");
+ ResultSet rs=stmt.executeQuery();
+ while(rs.next()){
+ peliculas.add(new
+Pelicula(rs.getInt("ID_Pelicula"),rs.getString("Titulo"),rs.getString("Gene
+ro"),rs.getInt("Duracion")));
+ }
+ }catch(SQLException e){
+ System.out.println("Error al consultar películas:
+"+e.getMessage());
+ }
+ return peliculas;
+ }
+ // Actualizar película
+ public void actualizarPelicula(int idPelicula,String
+nuevoTitulo,String nuevoGenero,int nuevaDuracion){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("UPDATE Pelicula SET Titulo=?, Genero=?, Duracion=? WHERE ID_Pelicula=?");
+ stmt.setString(1,nuevoTitulo);
+ stmt.setString(2,nuevoGenero);
+ stmt.setInt(3,nuevaDuracion);
+ stmt.setInt(4,idPelicula);int filasActualizadas=stmt.executeUpdate();
+
+ if(filasActualizadas>0){
+ System.out.println ("Película actualizada
+correctamente.");
+ }else{
+ System.out.println ("No se encontró la película con ID:
+"+idPelicula);
+ }
+ }catch(SQLException e){
+ System.out.println ("Error al actualizar película:
+"+e.getMessage());
+ }
+ }
+ // Eliminar película
+ public void eliminarPelicula(int idPelicula){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("DELETE FROM Pelicula WHERE ID_Pelicula=?");
+ stmt.setInt(1,idPelicula);
+
+ int filasEliminadas=stmt.executeUpdate();
+
+ if(filasEliminadas>0){
+ System.out.println ("Película eliminada correctamente.");
+ }else{
+ System.out.println ("No se encontró la película con ID:
+"+idPelicula);
+ }
+ }catch(SQLException e){
+ System.out.println ("Error al eliminar película:
+"+e.getMessage());
+ }
+ }
+ // Métodos para Funcion
+ public void agregarFuncion(int idFuncion,int idPelicula ,Timestamp
+fechaHora){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("INSERT INTO Funcion (ID_Funcion ,ID_Pelicula ,Fecha_Hora ) VALUES
+(?, ?, ?)");
+ stmt.setInt(1,idFuncion);
+ stmt.setInt(2,idPelicula);
+ stmt.setTimestamp(3,fechaHora);
+ stmt.executeUpdate();
+ System.out.println ("Función agregada correctamente.");
+ }catch(SQLException e){
+ System.out.println ("Error al agregar función:
+"+e.getMessage());
+ }
+ }
+ // Consultar funciones public List<Funcion> consultarFunciones(){
+ List<Funcion> funciones=new ArrayList<>();
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("SELECT * FROM Funcion");
+ ResultSet rs=stmt.executeQuery();
+ while(rs.next()){
+ funciones.add(new Funcion(rs.getInt
+("ID_Funcion"),rs.getInt ("ID_Pelicula"),rs.getTimestamp ("Fecha_Hora")));
+ }
+ }catch(SQLException e){
+ System.out.println ("Error al consultar funciones:
+"+e.getMessage());
+ }
+ return funciones;
+ }
+ // Actualizar función
+ public void actualizarFuncion(int idFuncion,int
+nuevoIdPelicula ,Timestamp nuevaFechaHora){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("UPDATE Funcion SET ID_Pelicula=?, Fecha_Hora=? WHERE ID_Funcion=?");
+ stmt.setInt(1,nuevoIdPelicula);
+ stmt.setTimestamp(2,nuevaFechaHora);
+ stmt.setInt(3,idFuncion);
+ int filasActualizadas=stmt.executeUpdate();
+ if(filasActualizadas>0){
+ System.out.println ("Función actualizada
+correctamente.");
+ }else{
+ System.out.println ("No se encontró la función con ID:
+"+idFuncion);
+ }
+ }catch(SQLException e){
+ System.out.println ("Error al actualizar función:
+"+e.getMessage());
+ }
+ }
+ // Eliminar función
+ public void eliminarFuncion(int idFuncion){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("DELETE FROM Funcion WHERE ID_Funcion=?");
+ stmt.setInt(1,idFuncion);
+ int filasEliminadas=stmt.executeUpdate();
+ if(filasEliminadas>0){
+ System.out.println ("Función eliminada correctamente."); }else{
+ System.out.println ("No se encontró la función con ID:
+"+idFuncion);
+ }
+ }
+ catch(SQLException e){
+ System.out.println ("Error al eliminar función:
+"+e.getMessage());
+ }
+ }
+ // Métodos para Boleta
+ public void agregarBoleta(int idBoleta,int idUsuario,int
+idFuncion,double precio){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("INSERT INTO Boleta (ID_Boleta ,ID_Usuario ,ID_Funcion ,Precio ) VALUES
+(?, ?, ?, ?)");
+ stmt.setInt(1,idBoleta);
+ stmt.setInt(2,idUsuario);
+ stmt.setInt(3,idFuncion);
+ stmt.setDouble(4,precio);
+ int filasInsertadas=stmt.executeUpdate();
+
+ if(filasInsertadas>0){
+ System.out.println ("\nBoleta agregada correctamente.");
+ }else{
+ System.out.println ("\nNo se pudo agregar la boleta.");
+ }
+ }
+ catch(SQLException e){
+ System.out.println ("\nError al agregar boleta:
+"+e.getMessage());
+ }
+ }
+ // Consultar boletas
+ public List<Boleta> consultarBoletas(){
+ List<Boleta> boletas=new ArrayList<>();
+
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("SELECT * FROM Boleta");
+
+ ResultSet rs=stmt.executeQuery();
+
+ while(rs.next()){
+ boletas.add(new
+Boleta(rs.getInt("ID_Boleta"),rs.getInt("ID_Usuario"),rs.getInt("ID_Funcion
+"),rs.getDouble("Precio")));
+ }
+ }
+ catch(SQLException e){
+ System.out.println("\nError al consultar boletas:
+"+e.getMessage());
+ }
+return boletas;
+ }
+ // Actualizar boleta
+ public void actualizarBoleta(int idBoleta,int nuevoIdUsuario,int
+nuevoIdFuncion,double nuevoPrecio){
+ try{
+ PreparedStatement stmt=getConnection().prepareStatement
+("UPDATE Boleta SET ID_Usuario=?, ID_Funcion=?, Precio=? WHERE ID_Boleta=?");
+
+ stmt.setInt(1,nuevoIdUsuario);
+
+ stmt.setInt(2,nuevoIdFuncion);
+
+ stmt.setDouble(3,nuevoPrecio);
+
+ stmt.setInt(4,idBoleta);
+ int filasActualizadas=stmt.executeUpdate();
+ if(filasActualizadas>0){
+ System.out.println("\nBoleta actualizada
+correctamente.");
+ }else{
+ System.out.println("\nNo se encontró la boleta con ID:
+"+idBoleta);
+ }
+ }
+ catch(SQLException e){
+ System.out.println("\nError al actualizar boleta:
+"+e.getMessage());
+ }
+ }
+ // Eliminar boleta
+ public void eliminarBoleta(int idBoleta){
+ try{
+ PreparedStatement
+stmt=getConnection().prepareStatement("DELETE FROM Boleta WHERE
+ID_Boleta=?");
+ stmt.setInt(1,idBoleta);
+ int filasEliminadas=stmt.executeUpdate();
+
+ if(filasEliminadas>0){
+ System.out.println("\nBoleta eliminada correctamente.");
+ }else{
+ System.out.println("\nNo se encontró la boleta con ID:
+"+idBoleta);
+ }
+ }
+ catch(SQLException e){
+ System.out.println("\nError al eliminar boleta:
+"+e.getMessage());
+ }
+ }
+ // Métodos para Asientopublic void agregarAsiento(int idAsiento,String numeroAsiento,String
+estado){
+ try{
+ PreparedStatement
+statement=getConnection().prepareCall("INSERT INTO Asiento
+(ID_Asiento ,Numero_Asiento ,Estado ) VALUES (?, ?, ?)");
+
+ statement .setInt (1,idAsiento);
+
+ statement .setString (2,numAsiento);
+
+ statement .setString (3,nuevoEstado);
+ int filasInsertadas=statement .executeUpdate();
+ if(filasInsertadas>0){
+ System .out .println ("\nAsiento agregado correctamente.");
+ }else{
+ System .out .println ("\nNo se pudo agregar el asiento.");
+ }
+ }
+ catch(SQLException e){
+ System.out.print("\nError al agregar
+asiento:"+e .getMessage());
+ }
+ }
+ public List<Asiento> consultarAsientos(){
+ List<Asiento> asientos=new ArrayList<>();
+ try{
+ PreparedStatement statement=getConnection().prepareCall("SELECT *
+FROM Asiento");
+ ResultSet resultSet=statement .executeQuery();
+ while(resultSet.next()){
+ asientos.add(new Asiento(resultSet .getInt
+("ID_Asiento"),resultSet .getString ("Numero_Asiento"),resultSet .getString
+("Estado")));
+ }
+ }
+ catch(SQLException ex){
+ ex.printStackTrace ();
+ }
+ return asientos;
+ }
+ public void actualizarAsiento(int idAsiento,String
+nuevoNumeroAsiento,String nuevoEstado){
+ try{
+ PreparedStatement statement=getConnection().prepareCall("UPDATE
+Asiento SET Numero_Asiento=?, Estado=? WHERE ID_Asiento=?");
+ statement .setString (1,nuevoNumeroAsiento);
+ statement .setString (2,nuevoEstado);
+ statement .setInt (3,idAsiento);int filasActualizadas=statement .executeUpdate();
+ if(filasActualizadas > 0){
+ System .out .println ("\nAsiento actualizado
+correctamente...");
+ }
+ else{
+ System .out .println ("\nNo se encontro el asiento con ID:"
++idAsiento);
+ }
+ }
+ catch(SQLException ex){
+ ex.printStackTrace ();
+ }
+ }
+ public void eliminarAsiento(int idAsiento){
+ try{
+ PreparedStatement statement=getConnection().prepareCall("DELETE
+FROM Asiento WHERE ID_Asiento=?");
+ statement .setInt (1,idAsiento);
+ int filasEliminadas=statement .executeUpdate();
+ if(filasEliminadas > 0){
+ System .out .println ("\nAsiento eliminado
+correctamente :)...");
+ }
+ else{
+ System .out .println ("\nNo se encontró el asiento con ID:"
++idAsiento);
+ }
+ }
+ catch(SQLException ex){
+ ex.printStackTrace ();
+ }
+ }
+// Actualizar reserva
+ public void actualizarReserva(int idReserva, int nuevoIdBoleta, int
+nuevoIdAsiento) {
+ try {
+ PreparedStatement stmt = getConnection().prepareStatement(
+ "UPDATE Reserva SET ID_Boleta=?, ID_Asiento=? WHERE
+ID_Reserva=?"
+ );
+ stmt.setInt(1, nuevoIdBoleta);
+ stmt.setInt(2, nuevoIdAsiento);
+ stmt.setInt(3, idReserva);
+ int filasActualizadas = stmt.executeUpdate();
+ if (filasActualizadas > 0) {
+ System.out.println("Reserva actualizada correctamente.");
+ } else {
+ System.out.println("No se encontró la reserva con ID: " +
+idReserva);
+ }
+ } catch (SQLException e) {
+ System.out.println("Error al actualizar reserva: " +
+e.getMessage());
+ }
+ }
+ // Eliminar reserva
+ public void eliminarReserva(int idReserva) {
+ try {
+ PreparedStatement stmt = getConnection().prepareStatement(
+ "DELETE FROM Reserva WHERE ID_Reserva=?"
+ );
+ stmt.setInt(1, idReserva);
+ int filasEliminadas = stmt.executeUpdate();
+ if (filasEliminadas > 0) {
+ System.out.println("Reserva eliminada correctamente.");
+ } else { System.out.println("No se encontró la reserva con ID: " + idReserva);
+ }
+ } catch (SQLException e) {
+ System.out.println("Error al eliminar reserva: " +
+e.getMessage());
+ }
+ }
+ // Consultar reservas
+ public List<Reserva> consultarReservas() {
+ List<Reserva> reservas = new ArrayList<>();
+ try {
+ PreparedStatement stmt = getConnection().prepareStatement(
+ "SELECT * FROM Reserva"
+ );
+ ResultSet rs = stmt.executeQuery();
+
+ while (rs.next()) {
+ reservas.add(new Reserva(
+ rs.getInt("ID_Reserva"),
+ rs.getInt("ID_Boleta"),
+ rs.getInt("ID_Asiento")
+ ));
+ }
+ } catch (SQLException e) {
+ System.out.println("Error al consultar reservas: " +
+e.getMessage());
+ }
+ return reservas;
+ }
+}

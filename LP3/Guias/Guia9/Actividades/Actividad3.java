@@ -23,8 +23,8 @@ public class Main {
         JLabel label2 = new JLabel("Segundo entero:");
         JTextField campo2 = new JTextField();
         
-        JButton botonMult = new JButton("Sumar");
-        JLabel resultadoLabel = new JLabel("La suma es: ");
+        JButton botonMult = new JButton("Multiplicar");
+        JLabel resultadoLabel = new JLabel("La multiplicación es: ");
         
         // Añade los componentes al marco
         frame.add(label1);

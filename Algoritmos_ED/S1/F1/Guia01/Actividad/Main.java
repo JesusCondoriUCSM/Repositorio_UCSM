@@ -12,15 +12,16 @@ public class Main {
         // Leer Rectángulo B
         System.out.println("Ingrese los datos del 2do rectángulo:");
         Rectangulo rectanguloB = leerRectangulo(sc);
-        
+        mostrar(rectanguloA,rectanguloB);
         // Relación entre los rectángulos
         if (Verificador.esSobrePos(rectanguloA, rectanguloB)) {
-            System.out.println("Rectángulos A y B se sobreponen.");
+            
         } else if (Verificador.esJunto(rectanguloA, rectanguloB)) {
             System.out.println("Rectángulos A y B se juntan.");
         } else if (Verificador.esDisjunto(rectanguloA, rectanguloB)) {
             System.out.println("Rectángulos A y B son disjuntos.");
         }
+        
 
     }
 	
@@ -29,7 +30,7 @@ public class Main {
         double x1 = sc.nextDouble();
         double y1 = sc.nextDouble();
 
-        System.out.print("Ingrese la esquina opuesta (x y):\n ");
+        System.out.print("Ingrese la esquina opuesta (x y):\n");
         double x2 = sc.nextDouble();
         double y2 = sc.nextDouble();
 

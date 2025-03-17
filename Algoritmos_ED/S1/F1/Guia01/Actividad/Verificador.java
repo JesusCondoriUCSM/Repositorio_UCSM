@@ -15,11 +15,11 @@ public class Verificador {
 	    double r2MinY = Math.min(r2.getEsquina1().getY(), r2.getEsquina2().getY());
 	    double r2MaxY = Math.max(r2.getEsquina1().getY(), r2.getEsquina2().getY());
 
-	    // Verificar superposición en ambos ejes
-	    boolean superposX = (r1MinX < r2MaxX) && (r1MaxX > r2MinX); 
-	    boolean superposY = (r1MinY < r2MaxY) && (r1MaxY > r2MinY); 
+	    // Verificar sobreposición en ambos ejes
+	    boolean sobreposX = (r1MinX < r2MaxX) && (r1MaxX > r2MinX); 
+	    boolean sobreposY = (r1MinY < r2MaxY) && (r1MaxY > r2MinY); 
 	    
-	    if (superposX && superposY) {
+	    if (sobreposX && sobreposY) {
 	    	System.out.println("Rectángulos A y B se sobreponen.");
 	        // Calcular los límites de la intersección
 	        double interseccionMinX = Math.max(r1MinX, r2MinX);
@@ -27,12 +27,12 @@ public class Verificador {
 	        double interseccionMinY = Math.max(r1MinY, r2MinY);
 	        double interseccionMaxY = Math.min(r1MaxY, r2MaxY);
 
-	        // Calcular el área de la superposición
+	        // Calcular el área de la sobreposición
 	        double ancho = interseccionMaxX - interseccionMinX;
 	        double altura = interseccionMaxY - interseccionMinY;
 	        double area = ancho * altura;
 
-	        //Área de superposición
+	        //Área de sobreposición
 	        System.out.println("Área de sobreposición = " + area);
 	        return true;
 	    } else {
@@ -73,4 +73,3 @@ public class Verificador {
 	}
 	
 }
-

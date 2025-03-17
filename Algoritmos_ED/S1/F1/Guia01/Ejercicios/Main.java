@@ -6,7 +6,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         int opc=0;
-        ContainerRect contg= new ContainerRect(5);
+    	System.out.println("Capacidad de la lista: ");
+    	int capa=sc.nextInt();
+        
+        ContainerRect contg= new ContainerRect(capa);
         while(opc!=3) {
         	System.out.println("Seleccione una opcion: \n");
         	System.out.println("1.Ingresar rectangulos \n2.Mostrar rectangulos \n3.Salir");
@@ -104,4 +107,3 @@ public class Main {
 		
 	}
 }
-

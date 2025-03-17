@@ -28,10 +28,13 @@ public class Main {
         	case 2:
         		System.out.println(contg);
         		break;
-        	default:
         		
-        		System.out.println("Opción invalida");
+        	case 3:
+        		System.out.println("Saliendo del programa...");
         		break;
+        	default:
+        		System.out.println("Opción inválida. Intente de nuevo.");
+        		
         	}
        
         }
@@ -101,3 +104,4 @@ public class Main {
 		
 	}
 }
+

@@ -15,68 +15,143 @@ public class Main {
 			opc=sc.nextInt();
 			switch(opc) {
 			case 1:
-				System.out.println("Ingrese los numeros");
-				num1=sc.nextDouble();
-				num2=sc.nextDouble();
-	
-				System.out.println("La suma es: "+Calculadora.suma(num1, num2));
+				System.out.println("Ingrese los numeros a sumar");
+				
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					num2=sc.nextInt();
+					System.out.println("La suma es: "+CalculadoraI.suma(num1, num2));
+					System.out.println("Los datos ingresados fueron enteros");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					num2=sc.nextDouble();
+					System.out.println("La suma es: "+CalculadoraD.suma(num1, num2));
+					System.out.println("Los datos ingresados fueron double");
+				}
 				break;
 				
 			case 2:
 				
-				System.out.println("Ingrese los dos numeros a restar");
-				num1=sc.nextDouble();
-				num2=sc.nextDouble();
-	
-				System.out.println("La resta es: "+Calculadora.resta(num1, num2));
+				System.out.println("Ingrese los numeros a restar");
+				
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					num2=sc.nextInt();
+					System.out.println("La resta es: "+CalculadoraI.resta(num1, num2));
+					System.out.println("Los datos ingresados fueron enteros");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					num2=sc.nextDouble();
+					System.out.println("La resta es: "+CalculadoraD.resta(num1, num2));
+					System.out.println("Los datos ingresados fueron double");
+				}
 				break;
 				
 			case 3:
 				
-				System.out.println("Ingrese los dos numeros a multiplicar");
-				num1=sc.nextDouble();
-				num2=sc.nextDouble();
-	
-				System.out.println("El producto es: "+Calculadora.producto(num1, num2));
+				System.out.println("Ingrese los numeros a multiplicar");
+				
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					num2=sc.nextInt();
+					System.out.println("El producto es: "+CalculadoraI.producto(num1, num2));
+					System.out.println("Los datos ingresados fueron enteros");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					num2=sc.nextDouble();
+					System.out.println("El producto es: "+CalculadoraD.producto(num1, num2));
+					System.out.println("Los datos ingresados fueron double");
+				}
 				break;
 				
 			case 4:
 				
-				System.out.println("Ingrese los dos numeros a dividir");
-				num1=sc.nextDouble();
-				num2=sc.nextDouble();
+				System.out.println("Ingrese los numeros a dividir");
 				
-				while(num2==0) {
-					System.out.println("Ingrese un numero valido");
-					num2=sc.nextDouble();
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					num2=sc.nextInt();
+					while(num2==0) {
+						System.out.println("Ingrese un numero valido");
+						num2=sc.nextInt();
+
+					}
+					System.out.println("El producto es: "+CalculadoraI.division(num1, num2));
+					System.out.println("Los datos ingresados fueron enteros");
 
 				}
-				System.out.println("La division es: "+Calculadora.division(num1, num2));
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					num2=sc.nextDouble();
+					while(num2==0) {
+						System.out.println("Ingrese un numero valido");
+						num2=sc.nextDouble();
+
+					}
+					System.out.println("El producto es: "+CalculadoraD.division(num1, num2));
+					System.out.println("Los datos ingresados fueron double");
+				}
+				
 				break;
 					
 			case 5:
-				System.out.println("Ingrese el numero base");
-				num1=sc.nextDouble();
-				System.out.println("Ingrese el exponente");
-				num2=sc.nextDouble();
-	
-				System.out.println("La potencia es: "+Calculadora.potencia(num1, num2));
+				System.out.println("Ingrese la base");
+				if(sc.hasNextInt()) {
+					
+					num1=sc.nextInt();
+					System.out.println("Ingrese el exponente");
+					num2=sc.nextInt();
+					System.out.println("La potencia es: "+CalculadoraI.potencia(num1, num2));
+					System.out.println("Los datos ingresados fueron enteros");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					System.out.println("Ingrese el exponente");
+					num2=sc.nextDouble();
+					System.out.println("El producto es: "+CalculadoraD.producto(num1, num2));
+					System.out.println("Los datos ingresados fueron double");
+
+				}
 				break;
 				
 			case 6:
 				
 				System.out.println("Ingrese el numero");
-				num1=sc.nextDouble();
 				
-				System.out.println("La raiz cuadrada es: "+Calculadora.raizCuadrada(num1));
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					System.out.println("La raiz cuadrada es: "+CalculadoraI.raizCuadrada(num1));
+					System.out.println("El dato ingresado fue entero");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					System.out.println("La raiz cuadrada es: "+CalculadoraD.raizCuadrada(num1));
+					System.out.println("El dato ingresado fue double");
+				}
 				break;
 				
 			case 7:
 				System.out.println("Ingrese el numero");
-				num1=sc.nextDouble();
 				
-	
-				System.out.println("La raiz cubica es: "+Calculadora.raizCubica(num1));
+				if(sc.hasNextInt()) {
+					num1=sc.nextInt();
+					System.out.println("La raiz cubica es: "+CalculadoraI.raizCubica(num1));
+					System.out.println("El dato ingresado fue entero");
+
+				}
+				else if(sc.hasNextDouble()){
+					num1=sc.nextDouble();
+					System.out.println("La raiz cubica es: "+CalculadoraD.raizCubica(num1));
+					System.out.println("El dato ingresado fue double");
+				}
 				break;
 				
 			case 8:

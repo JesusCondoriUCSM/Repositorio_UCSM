@@ -82,7 +82,7 @@ public class Main {
 						num2=sc.nextInt();
 
 					}
-					System.out.println("El producto es: "+CalculadoraI.division(num1, num2));
+					System.out.println("La division es: "+CalculadoraI.division(num1, num2));
 					System.out.println("Los datos ingresados fueron enteros");
 
 				}
@@ -94,7 +94,7 @@ public class Main {
 						num2=sc.nextDouble();
 
 					}
-					System.out.println("El producto es: "+CalculadoraD.division(num1, num2));
+					System.out.println("La division es: "+CalculadoraD.division(num1, num2));
 					System.out.println("Los datos ingresados fueron double");
 				}
 				
@@ -115,7 +115,7 @@ public class Main {
 					num1=sc.nextDouble();
 					System.out.println("Ingrese el exponente");
 					num2=sc.nextDouble();
-					System.out.println("El producto es: "+CalculadoraD.producto(num1, num2));
+					System.out.println("La potencia es: "+CalculadoraD.producto(num1, num2));
 					System.out.println("Los datos ingresados fueron double");
 
 				}

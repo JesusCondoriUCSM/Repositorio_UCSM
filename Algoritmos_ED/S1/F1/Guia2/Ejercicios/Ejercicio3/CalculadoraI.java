@@ -20,7 +20,7 @@ public class CalculadoraI {
 	//Division
 	public static <T extends Number> T division(T n1, T n2) {
 		
-		return (T) Integer.valueOf(n1.intValue()/n2.intValue());
+		return (T) Double.valueOf(n1.doubleValue()/n2.doubleValue());
 	}
 	//Potencia
 	public static <T extends Number> T potencia(T n1, T n2) {

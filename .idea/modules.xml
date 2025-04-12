@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia2/Actividades/Actividades.iml" filepath="$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia2/Actividades/Actividades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CodigosLP/CodigosLP.iml" filepath="$PROJECT_DIR$/CodigosLP/CodigosLP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia2/Ejercicios/Ejercicios.iml" filepath="$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia2/Ejercicios/Ejercicios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia01/Guia01.iml" filepath="$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia01/Guia01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LP3/Guias/Guia11/Guia11.iml" filepath="$PROJECT_DIR$/LP3/Guias/Guia11/Guia11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia3/Guia3.iml" filepath="$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia3/Guia3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia4/Guia4.iml" filepath="$PROJECT_DIR$/Algoritmos_ED/S1/F1/Guia4/Guia4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LP3/Guias/Guia8/Guia8.iml" filepath="$PROJECT_DIR$/LP3/Guias/Guia8/Guia8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LP3/Guias/Guia9/Guia9.iml" filepath="$PROJECT_DIR$/LP3/Guias/Guia9/Guia9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LP3/Guias/Guias.iml" filepath="$PROJECT_DIR$/LP3/Guias/Guias.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Programacion.iml" filepath="$PROJECT_DIR$/.idea/Programacion.iml" />
+    </modules>
+  </component>
+</project>

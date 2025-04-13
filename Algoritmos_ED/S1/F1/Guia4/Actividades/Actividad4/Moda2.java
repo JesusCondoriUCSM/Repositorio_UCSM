@@ -24,4 +24,10 @@ public class Moda2 {
 		}
 		return moda;
 	}
+	public static void main(String []args) {
+		Moda2 moda = new Moda2();
+		int lista[]= {1,3,3,4,4,4,5,6};
+		int m=moda.moda2(lista);
+		System.out.println("La moda es: "+m);
+	}
 }

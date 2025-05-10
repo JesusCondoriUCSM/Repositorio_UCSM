@@ -20,6 +20,7 @@ class StackArray<E> implements Stack<E> {
         else {
             E ele=array[tope];
             array[tope]=null;
+            tope--;
             return ele;
         }
     }

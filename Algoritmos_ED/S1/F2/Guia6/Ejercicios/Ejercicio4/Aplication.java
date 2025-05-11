@@ -22,7 +22,7 @@ public class Aplication {
 
             return stack.isEmpty();
         } catch (ExceptionIsEmpty e) {
-            // No debería ocurrir, pero lo capturamos por seguridad
+            
             return false;
         }
     }

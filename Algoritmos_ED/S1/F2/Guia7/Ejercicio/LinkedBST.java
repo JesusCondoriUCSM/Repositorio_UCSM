@@ -65,7 +65,7 @@
 	private int calculateHeightIterativo(Node node) {
 	    if (node == null) return -1;
 
-	    Queue<Node> queue = new Queue<>(); // Usa tu propia implementación
+	    Queue<Node> queue = new Queue<>(); 
 	    queue.enqueue(node);
 	    int height = -1;
 

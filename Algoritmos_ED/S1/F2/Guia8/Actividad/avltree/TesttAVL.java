@@ -18,8 +18,19 @@ public class TestAVL {
             arbol.insert(10);
             arbol.drawBST();
             System.out.println(arbol);
+
+            System.out.println("Elemento encontrado: "+arbol.search(2)); //Buscar un elemento que no esta en el arbol
+            System.out.println("Elemento encontrado: "+arbol.search(10));
+
+            System.out.println("Altura del subarbol: "+arbol.height(9));
+            System.out.println("Altura del subarbol: "+arbol.height(2));
+
+
+
         } catch (ItemDuplicated i) {
-            System.out.println(i);
+            System.out.println(i.getMessage());
+        } catch (ItemNoFound item) {
+            System.out.println(item.getMessage());
         }
     }
 }

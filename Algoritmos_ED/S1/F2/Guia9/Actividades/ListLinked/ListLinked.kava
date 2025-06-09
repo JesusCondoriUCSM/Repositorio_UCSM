@@ -1,0 +1,89 @@
+package ListLinked;
+
+public class ListLinked <E>{
+	private Node<E> root;
+	
+	public ListLinked() {
+		
+	}
+	
+	public Node <E>getRoot(){
+		return this.root;
+	}
+	
+	public void insertar(E data) {
+		Node <E>nuevo = new Node<>(data);
+		if(isEmpty()) {
+			this.root=nuevo;
+		}else {
+			Node <E>aux=root;
+			
+			while(aux.getNext()!=null) {
+				aux=aux.getNext();
+			}
+			
+			aux.setNext(nuevo);
+		}
+	}
+	
+	public void eliminar(E data) {
+		
+		if(isEmpty()) {
+			System.out.println("Vacio");
+			return;
+		}
+		if(root.getData().equals(data)) {
+			root=root.getNext();
+			return;
+		}
+		else {
+			Node<E> aux = root;
+		    while (aux.getNext() != null) {
+		        if (aux.getNext().getData().equals(data)) {
+		            aux.setNext(aux.getNext().getNext()); // saltar el nodo a eliminar
+		            return;
+		        }
+		        aux = aux.getNext();
+		    }
+		}
+	}
+	
+	public Node<E> search(E dato) {
+		if(isEmpty()) {
+			
+			return null;
+		}else {
+			Node <E> aux=root;
+			
+			while(aux!=null) {
+				if(aux.getData().equals(dato)){
+					return aux;
+				}
+				aux=aux.getNext();
+			}
+			return null;
+			
+		}
+	}
+	
+	public String printList() {
+		String acumulador="";
+	    Node<E> aux = root;
+	    while (aux != null) {
+	        acumulador+=aux.getData() + " -> ";
+	        
+	        aux = aux.getNext();
+	    }
+	    return acumulador;
+	}
+
+	
+	public boolean isEmpty() {
+		return this.root==null;
+	}
+	
+	public String toString() {
+		String rpta=printList();
+		return rpta;
+	}
+}

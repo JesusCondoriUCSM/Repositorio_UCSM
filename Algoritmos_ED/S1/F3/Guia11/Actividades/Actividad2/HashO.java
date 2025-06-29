@@ -25,7 +25,7 @@ public class HashO {
 	    
 	    // Verificar si ya existe un registro con la misma clave Y mismo nombre
 	    for (Register r : table[index]) {
-	        if (r.getKey() == reg.getKey() && r.getName().equals(reg.getName())) {
+	        if (r.equals(reg)) {
 	            return; // Evita insertar si ya existe exactamente el mismo registro
 	        }
 	    }

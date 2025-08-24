@@ -1,0 +1,23 @@
+/* RGB con valores enteros */
+.rgb-box1 {
+    background-color: rgb(246, 108, 11);
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* RGB con valores en porcentaje */
+.rgb-box2 {
+    background-color: rgb(56%, 70%, 11%);
+    color: white; 
+    padding: 15px; 
+    margin-bottom: 10px;
+}
+
+/* RGB con valores enteros */
+.rgb-box3 {
+    background-color: rgb(167, 38, 222);
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}

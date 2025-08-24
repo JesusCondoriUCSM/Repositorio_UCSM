@@ -1,0 +1,24 @@
+h1{
+    text-align: center;
+    
+    
+}
+
+h2{
+    font-size: 30px;
+}
+table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+table p{
+    font-size: 16 px;
+    width: 600px;
+    
+}
+
+td{
+    width: 200px;
+    margin: 20 px;
+}

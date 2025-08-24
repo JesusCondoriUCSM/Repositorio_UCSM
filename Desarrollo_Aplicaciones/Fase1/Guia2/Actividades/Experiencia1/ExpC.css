@@ -1,0 +1,41 @@
+body{
+    background-color: lightblue;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.description{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 23px;
+    margin: 10px auto;
+    width: 500px;
+    text-align: center;
+    line-height:1.5;
+}
+.tabla{
+    justify-content: center;
+    font-size: 22px;
+    width: 90%;
+    margin: 0 auto;
+}
+.tabla td{
+    
+    width: 50%;
+}
+
+.encabezado{
+    color: black;
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}

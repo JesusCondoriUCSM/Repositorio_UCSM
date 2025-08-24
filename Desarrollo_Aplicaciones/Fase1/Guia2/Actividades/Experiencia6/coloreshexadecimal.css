@@ -1,0 +1,21 @@
+/* Uso de colores hexadecimales */
+.hex-box1 {
+    background-color: #a7c128;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.hex-box2 {
+    background-color: #09598a;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.hex-box3 {
+    background-color: #7352d7;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}

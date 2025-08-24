@@ -1,1 +1,23 @@
 
+/* pixeles */
+.absoluto1 {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(130, 199, 110);
+    margin-bottom: 10px;
+}
+
+/* puntos */
+.absoluto2 {
+    width: 144pt;
+    height: 72pt;
+    background: #c15c5c;
+    margin-bottom: 10px;
+}
+
+/* pulgadas */
+.absoluto3 {
+    width: 2in;
+    height: 1in;
+    background-color: #80a6ee;
+}

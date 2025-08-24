@@ -1,0 +1,42 @@
+/* Primera letra en los párrafos */
+p::first-letter {
+    font-size: 30px;
+    font-weight: bold;
+    color: darkred;
+}
+
+/* Primera línea de los párrafos */
+p::first-line {
+    color: darkblue;
+    font-style: italic;
+}
+
+/* Cuando seleccionas texto */
+p::selection, h1::selection {
+    background-color: yellow;
+    color: black;
+}
+
+/* Contenido antes de un elemento */
+a::before {
+    content: "+";
+    color: green;
+}
+
+/* Contenido después de un elemento */
+a::after {
+    content: " $";
+    color: gray;
+}
+
+/* Estilo del texto del input */
+input::placeholder {
+    color: gray;
+    font-style: italic;
+}
+
+/* Viñetas de listas */
+li::marker {
+    color: red;
+    font-size: 20px;
+}

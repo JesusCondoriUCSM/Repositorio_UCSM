@@ -1,0 +1,58 @@
+
+/* Enlaces no visitados */
+a:link {
+    color: blue;
+}
+
+/* Enlaces ya visitados */
+a:visited {
+    color: purple;
+}
+
+/* Cuando se pasa el mouse */
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Cuando se hace clic */
+a:active {
+    color: orange;
+}
+
+/* Cuando el input tiene foco */
+input:focus {
+    background-color: lightyellow;
+    border: 2px solid green;
+}
+
+/* Cuando se muestra el placeholder */
+input:placeholder-shown {
+    border: 2px dashed gray;
+}
+
+/* Cuando el checkbox está marcado */
+input:checked + label {
+    color: green;
+    font-weight: bold;
+}
+
+/* El primer elemento de la lista */
+li:first-child {
+    color: red;
+}
+
+/* El último elemento de la lista */
+li:last-child {
+    color: blue;
+}
+
+/* El segundo elemento */
+li:nth-child(2) {
+    background-color: lightgray;
+}
+
+/* Todos los li excepto el tercero */
+li:not(:nth-child(3)) {
+    font-style: italic;
+}

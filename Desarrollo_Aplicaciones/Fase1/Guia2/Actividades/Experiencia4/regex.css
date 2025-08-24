@@ -1,0 +1,27 @@
+/* Todos los enlaces que empiezan con https */
+a[href^="https"] {
+    color: green;
+    font-weight: bold;
+}
+
+/* Todos los enlaces que terminan en .pdf */
+a[href$=".pdf"] {
+    color: red;
+    text-decoration: underline;
+}
+
+/* Enlaces que contienen la palabra "ucsm" */
+a[href*="ucsm"] {
+    background-color: lightyellow;
+}
+
+/* Selecciona p que tengan la palabra "importante" en su class */
+p[class~="importante"] {
+    border: 2px solid orange;
+    padding: 5px;
+}
+
+/* Selecciona imágenes cuyo alt sea "ucsm" o empiece por "ucsm-" */
+img[alt|="ucsm"] {
+    border: 3px solid blue;
+}

@@ -1,0 +1,77 @@
+main {
+    padding: 20px;
+}
+
+/* Selectores combinados */
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 2px;
+    display: inline-block;
+    list-style: none; 
+}
+
+/* Cabecera */
+header { 
+    background: linear-gradient(180deg, rgb(208, 46, 16) 0%, rgb(183, 38, 16) 50%, rgb(183, 38, 16) 53%, rgb(151, 28, 16) 100%); 
+    box-shadow: 0px 10px 15px rgba(150, 0, 0, 0.3), inset 0px 2px 1px rgba(255, 255, 255, 0.3), inset 0px -2px 1px rgba(150, 0, 0, 0.4); 
+    color: #fff; 
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Selectores múltiples */
+h2, h3 {
+    font-family: 'Arial', sans-serif;
+    color: darkred;
+}
+
+p {
+    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Pseudoclases */
+a:hover {
+    color: red;
+}
+
+/* Pseudoelementos */
+p::first-letter {
+    font-weight: bold;
+}
+
+
+/* Estilos globales */
+body {
+    font-family: 'Verdana', sans-serif;
+    background-color: #f4f4f4;
+    background: url("fondo-claro.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Pie de página */
+footer { 
+    background: linear-gradient(180deg, rgb(208, 46, 16) 0%, rgb(183, 38, 16) 50%, rgb(183, 38, 16) 53%, rgb(151, 28, 16) 100%); 
+    color: #fff; 
+    text-align: center; 
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.centered-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto; /* Ajusta la altura proporcionalmente */
+}

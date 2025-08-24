@@ -1,0 +1,23 @@
+/* Color de fondo rojo */
+.red-box {
+    background-color: red;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Color de fondo verde */
+.green-box {
+    background-color: green;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Color de fondo azul */
+.blue-box {
+    background-color: blue;
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}

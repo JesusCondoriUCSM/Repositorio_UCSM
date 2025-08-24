@@ -1,0 +1,67 @@
+/* Selecciona <strong> dentro de <p> */
+p strong {
+    color: red;
+}
+
+/* Selecciona h3 que son hijos directos de .evento */
+.evento > h3 {
+    color: blue;
+}
+
+/* Selecciona el primer <p> después de un h2 */
+h2 + p {
+    font-style: italic;
+}
+
+/* Selecciona todos los <p> después de un h2 */
+h2 ~ p {
+    color: green;
+}
+
+/* Selecciona todos los elementos dentro de .footer */
+.footer * {
+    font-size: 14px;
+}
+
+/* 6. Agrupado descendente múltiple */
+p a, .footer a {
+    text-decoration: none;
+    color: darkorange;
+}
+
+/* 7. Descendiente múltiple combinado */
+.evento p span {
+    font-weight: bold;
+    background-color: yellow;
+}
+
+
+
+/* Varios encabezados */
+h1, h2, h3 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Varias clases */
+.contenedor, .footer {
+    border: 1px solid gray;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Varias etiquetas */
+p, a {
+    font-family: "Times New Roman", serif;
+}
+
+/* Varias etiquetas con estilo común */
+div, span {
+    color: navy;
+}
+
+/* Diferentes tipos de elementos */
+h1, .tema, .footer p {
+    background-color: lightgray;
+}
+

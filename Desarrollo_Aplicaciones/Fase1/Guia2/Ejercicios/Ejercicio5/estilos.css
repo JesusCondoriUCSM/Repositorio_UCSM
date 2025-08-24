@@ -1,0 +1,105 @@
+/* Reset y tipografía */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: #222;
+}
+
+/* Header con flexbox */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #800000;
+  color: white;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+}
+.menu a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* Hero con pseudo-elemento decorativo */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #800000, #c44569);
+  color: white;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  width: 100%;
+  background: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  opacity: 0.3;
+}
+
+/* Botón con transición */
+.btn-cta {
+  background: gold;
+  border: none;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.btn-cta:hover {
+  transform: scale(1.1);
+}
+
+/* Noticias con selectores avanzados */
+.noticias {
+  padding: 2rem;
+}
+.tarjeta {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  transition: box-shadow 0.3s ease;
+}
+.tarjeta:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+/* Selector :nth-child */
+.tarjeta:nth-child(2) {
+  background: #f9f9f9;
+}
+
+/* Pseudo-elemento para títulos */
+h2::first-letter {
+  font-size: 2rem;
+  color: #800000;
+  font-weight: bold;
+}
+
+/* Footer con cascada */
+.footer {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+.footer a {
+  color: gold;
+  margin: 0 0.5rem;
+}
+.footer a:hover {
+  color: white;
+}

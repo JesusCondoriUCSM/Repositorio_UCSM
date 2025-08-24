@@ -1,0 +1,23 @@
+/* Uso de opacidad con RGBA */
+.rgba-box1 {
+    background-color: rgba(255, 77, 0, 0.5);
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Uso de opacidad con HSLA */
+.hsla-box1 {
+    background-color: hsla(55, 100%, 50%, 0.5);
+    color: black;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Uso de opacidad con hexadecimales */
+.hex-box1 {
+    background-color: #3bdb8080;
+    color: black;
+    padding: 15px;
+    margin-bottom: 10px;
+}

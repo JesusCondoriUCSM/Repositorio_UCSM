@@ -1,0 +1,71 @@
+
+/* Fuente general que heredan todos los elementos */
+body {
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+/* Heredan el tamaño de fuente */
+header, main, footer {
+    font-size: 18px;
+}
+
+/* Los enlaces heredan el color del padre */
+.links {
+    color: darkblue;
+}
+
+/* Listas heredan la fuente y el tamaño de su padre */
+ul {
+    margin-left: 30px;
+    line-height: 1.6;
+}
+
+/* Herencia de estilos de texto */
+section {
+    padding: 10px;
+}
+
+/* Los <p> dentro de section heredan color */
+section p {
+    font-style: italic;
+}
+
+/* Subtítulo con herencia de tipografía */
+.subtitulo {
+    font-size: 20px;
+    color: gray;
+}
+
+
+/* CASCADA (5 casos)*/
+
+
+/* Caso 1: Regla general */
+p {
+    color: black;
+}
+
+/* Caso 2: Regla más específica pisa la anterior */
+.avisos p {
+    color: brown;
+}
+
+/* Caso 3: Aún más específica, pisa las anteriores */
+.avisos p.importante {
+    color: red;
+    font-weight: bold;
+}
+
+/* Caso 4: Prioridad por orden: este pisa al anterior */
+.avisos p.importante {
+    text-decoration: underline;
+}
+
+/* Caso 5: !important pisa todo lo anterior */
+footer p {
+    color: white !important;
+    background-color: #444;
+    text-align: center;
+    padding: 10px;
+}

@@ -1,0 +1,21 @@
+/* Uso de colores HLS */
+.hls-box1 {
+    background-color: hsl(0, 86%, 39%);
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.hls-box2 {
+    background-color: hsl(67, 91%, 59%);
+    color: black; 
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.hls-box3 {
+    background-color: hsl(186, 72%, 64%);
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+}

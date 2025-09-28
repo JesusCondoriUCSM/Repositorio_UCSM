@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Repositorio_UCSM/static/css/main.f855e6bc.css",
+    "main.js": "/Repositorio_UCSM/static/js/main.878aeb81.js",
+    "static/js/453.c0d57229.chunk.js": "/Repositorio_UCSM/static/js/453.c0d57229.chunk.js",
+    "index.html": "/Repositorio_UCSM/index.html",
+    "main.f855e6bc.css.map": "/Repositorio_UCSM/static/css/main.f855e6bc.css.map",
+    "main.878aeb81.js.map": "/Repositorio_UCSM/static/js/main.878aeb81.js.map",
+    "453.c0d57229.chunk.js.map": "/Repositorio_UCSM/static/js/453.c0d57229.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.878aeb81.js"
+  ]
+}

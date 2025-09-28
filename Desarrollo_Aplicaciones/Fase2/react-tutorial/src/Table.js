@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import './table.css';
 
 const TableHeader = () => {
   return (
@@ -18,7 +19,7 @@ const TableBody = (props) => {
         <td>{row.name}</td>
         <td>{row.job}</td>
         <td>
-          <button onClick={() =>props.removeCharacter(index) }>Delete</button>
+          <button id='boton' onClick={() =>props.removeCharacter(index) }>Delete</button>
         </td>
       </tr>
     )

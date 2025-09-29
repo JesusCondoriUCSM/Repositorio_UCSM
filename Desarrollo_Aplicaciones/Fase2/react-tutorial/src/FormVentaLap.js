@@ -3,8 +3,8 @@ import React, {Component} from "react";
 class FormR extends Component {
   initialState = {
       nombre: '',
-      edad: '',
-      correo: '',
+      descripcion: '',
+      precio: '',
   }
   state = this.initialState
 
@@ -22,25 +22,25 @@ class FormR extends Component {
   }
 
   render(){
-      const {nombre, edad, correo} = this.state;
+      const {nombre, descripcion, precio} = this.state;
 
       return(
           <form>
               <label htmlFor="nombre">Nombre</label>
               <input type="text" name="nombre" id="nombre" value={nombre} onChange={this.handleChange} />
-              <label htmlFor="edad">Edad</label>
+              <label htmlFor="edad">Descripcion</label>
               <input
               type="text"
-              name="edad"
-              id="edad"
-              value={edad}
+              name="descripcion"
+              id="descripcion"
+              value={descripcion}
               onChange={this.handleChange} />
-              <label htmlFor="correo">Correo</label>
+              <label htmlFor="correo">Precio</label>
               <input
               type="text"
-              name="correo"
-              id="correo"
-              value={correo}
+              name="precio"
+              id="precio"
+              value={precio}
               onChange={this.handleChange} />
               <input type="button" value="Submit" onClick={this.submitForm}/>
           </form>

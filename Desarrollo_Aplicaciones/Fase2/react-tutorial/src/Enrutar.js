@@ -6,15 +6,17 @@ import About from "./About";
 class App extends Component {
     render(){
         return (
+    
     <Router>
       <div>
+        <h1>Navegación</h1>
         <nav>
           <ul>
             <li>
-              <Link to="/home">Ir a Home</Link>
+              <Link to="/home">Menú Principal</Link>
             </li>
             <li>
-              <Link to="/about">Ir a About</Link>
+              <Link to="/about">Productos</Link>
             </li>
           </ul>
         </nav>

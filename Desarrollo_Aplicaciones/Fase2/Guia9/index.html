@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 03: Cargar Archivos por Especialidad</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Subir Archivos por Especialidad</h1>
+
+    <div class="container">
+        <form action="http://localhost/DDA_Lab09/carga_archivos/upload.php" method="POST" enctype="multipart/form-data">
+            <label for="archivo">Selecciona el archivo:</label>
+            <input type="file" id="archivo" name="archivo" required><br><br>
+
+            <label for="especialidad">Especialidad:</label>
+            <select id="especialidad" name="especialidad" required>
+                <option value="Estadistica">Estadística</option>
+                <option value="DesarrolloWeb">Desarrollo Web</option>
+                <option value="Testing">Testing</option>
+            </select><br><br>
+
+            <input type="submit" value="Subir Archivo">
+        </form>
+    </div>
+</body>
+</html>

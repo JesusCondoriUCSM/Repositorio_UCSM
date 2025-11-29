@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Carrito extends Component {
   render() {
-    const { carrito, onEliminar } = this.props; // recibe también la función de eliminar
+    const { carrito, onEliminar } = this.props; 
 
     return (
       <div>

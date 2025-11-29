@@ -11,6 +11,7 @@ class App extends Component {
 
   handleAgregar = (producto) => {
     this.setState({ carrito: [...this.state.carrito, producto] });
+    
   }
 
   handleEliminar = (index) => {

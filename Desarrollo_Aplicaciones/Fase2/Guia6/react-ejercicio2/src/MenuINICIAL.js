@@ -4,7 +4,7 @@ class Menu extends Component {
 
   submitForm = () =>{
     this.props.handleSubmit (this.state)
-    this.setState (this.initialState)
+    
   }
   render(){
     
